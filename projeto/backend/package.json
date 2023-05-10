@@ -1,0 +1,51 @@
+{
+	"name": "backend",
+	"private": true,
+	"main": "typings/index.d.ts",
+	"license": "MIT",
+	"scripts": {
+		"build": "nest build",
+		"dev": "nest start --watch",
+		"start": "nest start",
+		"start:debug": "nest start --debug --watch",
+		"start:prod": "node dist/main",
+		"test": "jest"
+	},
+	"dependencies": {
+		"@fastify/helmet": "^10.1.0",
+		"@fastify/static": "^6.10.0",
+		"@hyoretsu/decorators": "^1.1.2",
+		"@nestjs/common": "^9.3.12",
+		"@nestjs/config": "^2.3.1",
+		"@nestjs/core": "^9.3.12",
+		"@nestjs/platform-fastify": "^9.3.10",
+		"@nestjs/swagger": "^6.3.0",
+		"class-transformer": "^0.5.1",
+		"class-validator": "^0.14.0",
+		"date-fns": "^2.30.0",
+		"pg": "^8.10.0",
+		"reflect-metadata": "^0.1.13",
+		"rxjs": "^7.2.0"
+	},
+	"devDependencies": {
+		"@nestjs/cli": "^9.3.0",
+		"@nestjs/schematics": "^9.1.0",
+		"@nestjs/testing": "^9.3.12",
+		"@shared/eslint-config-eslint": "workspace:^",
+		"@types/jest": "^29.4.4",
+		"@types/multer": "^1.4.7",
+		"@types/multer-s3": "^3.0.0",
+		"@types/node": "18.11.18",
+		"@types/pg": "^8.6.6",
+		"jest": "29.3.1",
+		"source-map-support": "^0.5.20",
+		"ts-jest": "29.1.0",
+		"ts-loader": "^9.2.3",
+		"ts-node": "^10.0.0",
+		"tsconfig-paths": "4.1.1",
+		"webpack": "^5.76.2"
+	},
+	"engines": {
+		"node": "^12 || >=14"
+	}
+}

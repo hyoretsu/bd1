@@ -1,0 +1,21 @@
+**/dist
+**/node_modules
+**/tmp
+**/.vscode
+!/.vscode/launch.json
+!.gitkeep
+*.log
+
+# Env files
+**/.env
+**/.env*.local
+
+# Test files
+**/coverage
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# anotações para reuniões
+anotacoes.md
