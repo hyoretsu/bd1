@@ -4,11 +4,11 @@ import { Pool } from "pg";
 const dbProvider: ValueProvider = {
 	provide: "PG_CONNECTION",
 	useValue: new Pool({
-		host: process.env.DB_HOST,
-		port: Number(process.env.POSTGRES_PORT),
-		user: process.env.POSTGRES_USER,
-		password: process.env.POSTGRES_PASS,
-		database: process.env.DB_NAME,
+		host: process.env.DB_HOST || "localhost",
+		port: Number(process.env.POSTGRES_PORT) || 5432,
+		user: process.env.POSTGRES_USER || "postgres",
+		password: process.env.POSTGRES_PASS || "postgres",
+		database: process.env.DB_NAME || "thousand-sunny",
 	}),
 };
 
