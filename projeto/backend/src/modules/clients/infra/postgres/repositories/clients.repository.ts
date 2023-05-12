@@ -86,6 +86,14 @@ export default class PostgresClientsRepository implements ClientsRepository {
 		return client;
 	}
 
+	public async findByName(name: string): Promise<Client[]> {
+		const { rows: clients } = await this.pg.query<Client>(
+			`SELECT * FROM "Client" WHERE "name" ILIKE '%${name}%'`,
+		);
+
+		return clients;
+	}
+
 	public async findByPhoneNumber(phoneNumber: string): Promise<Client | null> {
 		const {
 			rows: [client],

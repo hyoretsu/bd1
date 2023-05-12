@@ -6,6 +6,7 @@ import ClientsController from "./infra/http/controllers/clients.controller";
 import PostgresClientsRepository from "./infra/postgres/repositories/clients.repository";
 import ClientsRepository from "./repositories/clients.repository";
 import CreateClient from "./services/CreateClient.service";
+import FindClient from "./services/FindClients.service";
 
 @Module({
 	imports: [DatabaseModule],
@@ -15,7 +16,7 @@ import CreateClient from "./services/CreateClient.service";
 			provide: ClientsRepository,
 			useClass: PostgresClientsRepository,
 		},
-		...[CreateClient],
+		...[CreateClient, FindClient],
 	],
 })
 export default class ClientsModule {}
