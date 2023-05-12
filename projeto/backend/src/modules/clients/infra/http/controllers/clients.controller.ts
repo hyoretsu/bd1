@@ -1,11 +1,13 @@
-import { Body, Controller, Delete, Get, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Patch, Post } from "@nestjs/common";
 
 import CreateClientDTO from "@modules/clients/dtos/CreateClient.dto";
 import DeleteClientDTO from "@modules/clients/dtos/DeleteClient.dto";
+import EditClientDTO from "@modules/clients/dtos/EditClient.dto";
 import FindClientDTO from "@modules/clients/dtos/FindClients.dto";
 import Client from "@modules/clients/entities/Client";
 import CreateClient from "@modules/clients/services/CreateClient.service";
 import DeleteClient from "@modules/clients/services/DeleteClient.service";
+import EditClient from "@modules/clients/services/EditClient.service";
 import FindClients from "@modules/clients/services/FindClients.service";
 import ListClients from "@modules/clients/services/ListClients.service";
 
@@ -14,6 +16,7 @@ export default class ClientsController {
 	constructor(
 		private createClient: CreateClient,
 		private deleteClient: DeleteClient,
+		private editClient: EditClient,
 		private findClients: FindClients,
 		private listClients: ListClients,
 	) {}
@@ -28,6 +31,13 @@ export default class ClientsController {
 		const clients = await this.listClients.execute();
 
 		return clients;
+	}
+
+	@Patch()
+	async patchClients(@Body() body: EditClientDTO): Promise<Client> {
+		const client = await this.editClient.execute(body);
+
+		return client;
 	}
 
 	@Post()

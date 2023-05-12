@@ -7,6 +7,7 @@ import PostgresClientsRepository from "./infra/postgres/repositories/clients.rep
 import ClientsRepository from "./repositories/clients.repository";
 import CreateClient from "./services/CreateClient.service";
 import DeleteClient from "./services/DeleteClient.service";
+import EditClient from "./services/EditClient.service";
 import FindClient from "./services/FindClients.service";
 import ListClients from "./services/ListClients.service";
 
@@ -18,7 +19,7 @@ import ListClients from "./services/ListClients.service";
 			provide: ClientsRepository,
 			useClass: PostgresClientsRepository,
 		},
-		...[CreateClient, DeleteClient, FindClient, ListClients],
+		...[CreateClient, DeleteClient, EditClient, FindClient, ListClients],
 	],
 })
 export default class ClientsModule {}

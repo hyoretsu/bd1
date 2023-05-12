@@ -1,5 +1,10 @@
 import CreateClientDTO from "../dtos/CreateClient.dto";
+import EditClientDTO from "../dtos/EditClient.dto";
 import Client from "../entities/Client";
+
+export type UpdateClientPayload = Omit<EditClientDTO, "newPassword" | "oldPassword"> & {
+	password?: string;
+};
 
 export default abstract class ClientsRepository {
 	abstract create(data: CreateClientDTO): Promise<Client>;
@@ -10,4 +15,5 @@ export default abstract class ClientsRepository {
 	abstract findById(id: string): Promise<Client | null>;
 	abstract findByName(name: string): Promise<Client[]>;
 	abstract findByPhoneNumber(phoneNumber: string): Promise<Client | null>;
+	abstract update(data: UpdateClientPayload): Promise<Client>;
 }
