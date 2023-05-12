@@ -2,7 +2,6 @@ import { Inject } from "@nestjs/common";
 import { Pool } from "pg";
 
 import CreateClientDTO from "@modules/clients/dtos/CreateClient.dto";
-import EditClientDTO from "@modules/clients/dtos/EditClient.dto";
 import Client from "@modules/clients/entities/Client";
 import ClientsRepository, { UpdateClientPayload } from "@modules/clients/repositories/clients.repository";
 
