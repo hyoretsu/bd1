@@ -8,6 +8,7 @@ import ClientsRepository from "./repositories/clients.repository";
 import CreateClient from "./services/CreateClient.service";
 import DeleteClient from "./services/DeleteClient.service";
 import FindClient from "./services/FindClients.service";
+import ListClients from "./services/ListClients.service";
 
 @Module({
 	imports: [DatabaseModule],
@@ -17,7 +18,7 @@ import FindClient from "./services/FindClients.service";
 			provide: ClientsRepository,
 			useClass: PostgresClientsRepository,
 		},
-		...[CreateClient, DeleteClient, FindClient],
+		...[CreateClient, DeleteClient, FindClient, ListClients],
 	],
 })
 export default class ClientsModule {}

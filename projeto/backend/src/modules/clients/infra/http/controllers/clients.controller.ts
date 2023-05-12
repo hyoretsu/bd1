@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Post } from "@nestjs/common";
 
 import CreateClientDTO from "@modules/clients/dtos/CreateClient.dto";
 import DeleteClientDTO from "@modules/clients/dtos/DeleteClient.dto";
@@ -7,6 +7,7 @@ import Client from "@modules/clients/entities/Client";
 import CreateClient from "@modules/clients/services/CreateClient.service";
 import DeleteClient from "@modules/clients/services/DeleteClient.service";
 import FindClients from "@modules/clients/services/FindClients.service";
+import ListClients from "@modules/clients/services/ListClients.service";
 
 @Controller("clients")
 export default class ClientsController {
@@ -14,11 +15,19 @@ export default class ClientsController {
 		private createClient: CreateClient,
 		private deleteClient: DeleteClient,
 		private findClients: FindClients,
+		private listClients: ListClients,
 	) {}
 
 	@Delete()
 	async deleteClients(@Body() body: DeleteClientDTO): Promise<void> {
 		await this.deleteClient.execute(body);
+	}
+
+	@Get()
+	async getClients(): Promise<Client[]> {
+		const clients = await this.listClients.execute();
+
+		return clients;
 	}
 
 	@Post()

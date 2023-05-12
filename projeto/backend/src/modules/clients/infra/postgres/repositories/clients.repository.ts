@@ -74,6 +74,12 @@ export default class PostgresClientsRepository implements ClientsRepository {
 		await this.pg.query(`DELETE FROM "Client" WHERE id = '${id}'`);
 	}
 
+	public async findAll(): Promise<Client[]> {
+		const { rows: clients } = await this.pg.query<Client>(`SELECT * FROM "Client"`);
+
+		return clients;
+	}
+
 	public async findByCpf(cpf: string): Promise<Client | null> {
 		const {
 			rows: [client],
