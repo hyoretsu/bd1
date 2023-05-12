@@ -6,6 +6,7 @@ import ClientsController from "./infra/http/controllers/clients.controller";
 import PostgresClientsRepository from "./infra/postgres/repositories/clients.repository";
 import ClientsRepository from "./repositories/clients.repository";
 import CreateClient from "./services/CreateClient.service";
+import DeleteClient from "./services/DeleteClient.service";
 import FindClient from "./services/FindClients.service";
 
 @Module({
@@ -16,7 +17,7 @@ import FindClient from "./services/FindClients.service";
 			provide: ClientsRepository,
 			useClass: PostgresClientsRepository,
 		},
-		...[CreateClient, FindClient],
+		...[CreateClient, DeleteClient, FindClient],
 	],
 })
 export default class ClientsModule {}

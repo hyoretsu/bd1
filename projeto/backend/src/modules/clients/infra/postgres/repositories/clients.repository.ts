@@ -70,6 +70,10 @@ export default class PostgresClientsRepository implements ClientsRepository {
 		return client;
 	}
 
+	public async delete(id: string): Promise<void> {
+		await this.pg.query(`DELETE FROM "Client" WHERE id = '${id}'`);
+	}
+
 	public async findByCpf(cpf: string): Promise<Client | null> {
 		const {
 			rows: [client],
@@ -82,6 +86,14 @@ export default class PostgresClientsRepository implements ClientsRepository {
 		const {
 			rows: [client],
 		} = await this.pg.query<Client>(`SELECT * FROM "Client" WHERE email = '${email}'`);
+
+		return client;
+	}
+
+	public async findById(id: string): Promise<Client | null> {
+		const {
+			rows: [client],
+		} = await this.pg.query<Client>(`SELECT * FROM "Client" WHERE id = '${id}'`);
 
 		return client;
 	}
