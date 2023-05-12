@@ -1,7 +1,9 @@
 import { IsOptional } from "@hyoretsu/decorators";
 import { IsString } from "class-validator";
 
-export default class FindClientsDTO {
+import DeleteClientDTO from "./DeleteClient.dto";
+
+export default class FindClientsDTO extends DeleteClientDTO {
 	@IsOptional()
 	@IsString()
 	name?: string;
