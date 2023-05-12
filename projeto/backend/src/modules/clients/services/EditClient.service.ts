@@ -16,7 +16,14 @@ export default class EditClient {
 			throw new HttpException("This user does not exist", HttpStatus.NOT_FOUND);
 		}
 
-		if (oldPassword && newPassword) {
+		if (newPassword) {
+			if (!oldPassword) {
+				throw new HttpException(
+					"You need to confirm your old password in order to change it",
+					HttpStatus.FORBIDDEN,
+				);
+			}
+
 			const samePassword = await this.hashProvider.compareHash(oldPassword, client.password);
 			if (!samePassword) {
 				throw new HttpException("Invalid password", HttpStatus.FORBIDDEN);
