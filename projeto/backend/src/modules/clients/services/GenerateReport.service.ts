@@ -3,9 +3,9 @@ import { Injectable } from "@nestjs/common";
 import ClientsRepository from "../repositories/clients.repository";
 
 export interface ClientReport {
-	birthCity: Record<string, number>;
+	birthCity: Array<[string, number]>;
 	onePiece: Record<"yes" | "no", number>;
-	soccerTeam: Record<string, number>;
+	soccerTeam: Array<[string, number]>;
 	total: number;
 }
 
@@ -19,13 +19,7 @@ export default class GenerateReport {
 
 		const report = {
 			total: Number(total),
-			birthCity: birthCityCount.reduce(
-				(obj, value) => ({
-					...obj,
-					[value.birthCity]: Number(value.count),
-				}),
-				{},
-			),
+			birthCity: birthCityCount.map(value => [value.birthCity, Number(value.count)]),
 			onePiece: onePieceCount.reduce(
 				(obj, value) => ({
 					...obj,
@@ -33,13 +27,7 @@ export default class GenerateReport {
 				}),
 				{},
 			),
-			soccerTeam: soccerTeamCount.reduce(
-				(obj, value) => ({
-					...obj,
-					[value.soccerTeam]: Number(value.count),
-				}),
-				{},
-			),
+			soccerTeam: soccerTeamCount.map(value => [value.soccerTeam, Number(value.count)]),
 		} as ClientReport;
 
 		return report;
