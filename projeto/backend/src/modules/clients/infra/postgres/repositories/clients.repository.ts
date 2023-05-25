@@ -3,7 +3,10 @@ import { Pool } from "pg";
 
 import CreateClientDTO from "@modules/clients/dtos/CreateClient.dto";
 import Client from "@modules/clients/entities/Client";
-import ClientsRepository, { UpdateClientPayload } from "@modules/clients/repositories/clients.repository";
+import ClientsRepository, {
+	ReportData,
+	UpdateClientPayload,
+} from "@modules/clients/repositories/clients.repository";
 
 export default class PostgresClientsRepository implements ClientsRepository {
 	constructor(@Inject("PG_CONNECTION") private pg: Pool) {
@@ -34,7 +37,7 @@ export default class PostgresClientsRepository implements ClientsRepository {
                 INSERT INTO
                     "Client" (
                         ${Object.keys(data)
-							.map(key => '"key"')
+							.map(key => `"${key}"`)
 							.join(",")}
                     )
                 VALUES
@@ -96,6 +99,26 @@ export default class PostgresClientsRepository implements ClientsRepository {
 		} = await this.pg.query<Client>(`SELECT * FROM "Client" WHERE "phoneNumber" = '${phoneNumber}'`);
 
 		return client;
+	}
+
+	public async generateReportData(): Promise<ReportData> {
+		const {
+			rows: [{ total }],
+		} = await this.pg.query(`SELECT COUNT(*) as "total" FROM "Client"`);
+
+		const { rows: birthCityCount } = await this.pg.query(
+			`SELECT "birthCity", COUNT(*) FROM "Client" GROUP BY "birthCity"`,
+		);
+
+		const { rows: onePieceCount } = await this.pg.query(
+			`SELECT "onePiece", COUNT(*) FROM "Client" GROUP BY "onePiece"`,
+		);
+
+		const { rows: soccerTeamCount } = await this.pg.query(
+			`SELECT "soccerTeam", COUNT(*) FROM "Client" GROUP BY "soccerTeam"`,
+		);
+
+		return { birthCityCount, onePieceCount, soccerTeamCount, total };
 	}
 
 	public async update({ id, ...data }: UpdateClientPayload): Promise<Client> {

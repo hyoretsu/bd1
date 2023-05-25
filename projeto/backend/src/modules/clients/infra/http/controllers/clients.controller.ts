@@ -9,6 +9,7 @@ import CreateClient from "@modules/clients/services/CreateClient.service";
 import DeleteClient from "@modules/clients/services/DeleteClient.service";
 import EditClient from "@modules/clients/services/EditClient.service";
 import FindClients from "@modules/clients/services/FindClients.service";
+import GenerateReport from "@modules/clients/services/GenerateReport.service";
 import ListClients from "@modules/clients/services/ListClients.service";
 
 @Controller("clients")
@@ -18,6 +19,7 @@ export default class ClientsController {
 		private deleteClient: DeleteClient,
 		private editClient: EditClient,
 		private findClients: FindClients,
+		private generateReport: GenerateReport,
 		private listClients: ListClients,
 	) {}
 
@@ -52,5 +54,12 @@ export default class ClientsController {
 		const clients = await this.findClients.execute(body);
 
 		return clients;
+	}
+
+	@Get("report")
+	async getClientsReport(): Promise<any> {
+		const report = await this.generateReport.execute();
+
+		return report;
 	}
 }

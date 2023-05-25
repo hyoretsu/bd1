@@ -6,6 +6,16 @@ export type UpdateClientPayload = Omit<EditClientDTO, "newPassword" | "oldPasswo
 	password?: string;
 };
 
+export type ReportData = {
+	birthCityCount: Record<"birthCity" | "count", string>[];
+	onePieceCount: Array<{
+		count: string;
+		onePiece: boolean;
+	}>;
+	soccerTeamCount: Record<"soccerTeam" | "count", string>[];
+	total: string;
+};
+
 export default abstract class ClientsRepository {
 	abstract create(data: CreateClientDTO): Promise<Client>;
 	abstract delete(id: string): Promise<void>;
@@ -15,5 +25,6 @@ export default abstract class ClientsRepository {
 	abstract findById(id: string): Promise<Client | null>;
 	abstract findByName(name: string): Promise<Client[]>;
 	abstract findByPhoneNumber(phoneNumber: string): Promise<Client | null>;
+	abstract generateReportData(): Promise<ReportData>;
 	abstract update(data: UpdateClientPayload): Promise<Client>;
 }

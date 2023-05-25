@@ -10,6 +10,7 @@ import CreateClient from "./services/CreateClient.service";
 import DeleteClient from "./services/DeleteClient.service";
 import EditClient from "./services/EditClient.service";
 import FindClient from "./services/FindClients.service";
+import GenerateReport from "./services/GenerateReport.service";
 import ListClients from "./services/ListClients.service";
 
 @Module({
@@ -24,7 +25,7 @@ import ListClients from "./services/ListClients.service";
 			provide: HashProvider,
 			useClass: hashProviderImplementations["bcrypt"],
 		},
-		...[CreateClient, DeleteClient, EditClient, FindClient, ListClients],
+		...[CreateClient, DeleteClient, EditClient, FindClient, GenerateReport, ListClients],
 	],
 })
 export default class ClientsModule {}
