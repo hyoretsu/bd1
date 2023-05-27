@@ -45,6 +45,10 @@ export default class PostgresSellersRepository implements SellersRepository {
 		return seller;
 	}
 
+	public async delete(id: string): Promise<void> {
+		await this.pg.query(`DELETE FROM "Seller" WHERE id = '${id}'`);
+	}
+
 	public async findAll(): Promise<Seller[]> {
 		const { rows: sellers } = await this.pg.query<Seller>(`SELECT * FROM "Seller"`);
 
@@ -55,6 +59,14 @@ export default class PostgresSellersRepository implements SellersRepository {
 		const {
 			rows: [seller],
 		} = await this.pg.query<Seller>(`SELECT * FROM "Seller" WHERE email = '${email}'`);
+
+		return seller;
+	}
+
+	public async findById(id: string): Promise<Seller | null> {
+		const {
+			rows: [seller],
+		} = await this.pg.query<Seller>(`SELECT * FROM "Seller" WHERE id = '${id}'`);
 
 		return seller;
 	}

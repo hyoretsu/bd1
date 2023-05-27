@@ -1,13 +1,24 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Post } from "@nestjs/common";
 
 import CreateSellerDTO from "@modules/sellers/dtos/CreateSeller.dto";
+import DeleteSellerDTO from "@modules/sellers/dtos/DeleteSeller.dto";
 import Seller from "@modules/sellers/entities/Seller";
 import CreateSeller from "@modules/sellers/services/CreateSeller.service";
+import DeleteSeller from "@modules/sellers/services/DeleteSeller.service";
 import ListSellers from "@modules/sellers/services/ListSellers.service";
 
 @Controller("sellers")
 export default class SellersController {
-	constructor(private createSeller: CreateSeller, private listSellers: ListSellers) {}
+	constructor(
+		private createSeller: CreateSeller,
+		private deleteSeller: DeleteSeller,
+		private listSellers: ListSellers,
+	) {}
+
+	@Delete()
+	async deleteSellers(@Body() body: DeleteSellerDTO): Promise<void> {
+		await this.deleteSeller.execute(body);
+	}
 
 	@Get()
 	async getSellers(): Promise<Seller[]> {

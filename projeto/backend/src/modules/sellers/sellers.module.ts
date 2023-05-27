@@ -6,6 +6,7 @@ import SellersController from "./infra/http/controllers/sellers.controller";
 import PostgresSellersRepository from "./infra/postgres/repositories/sellers.repository";
 import SellersRepository from "./repositories/sellers.repository";
 import CreateSeller from "./services/CreateSeller.service";
+import DeleteSeller from "./services/DeleteSeller.service";
 import ListSellers from "./services/ListSellers.service";
 
 @Module({
@@ -16,7 +17,7 @@ import ListSellers from "./services/ListSellers.service";
 			provide: SellersRepository,
 			useClass: PostgresSellersRepository,
 		},
-		...[CreateSeller, ListSellers],
+		...[CreateSeller, DeleteSeller, ListSellers],
 	],
 })
 export default class SellersModule {}
