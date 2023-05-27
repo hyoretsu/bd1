@@ -45,6 +45,12 @@ export default class PostgresSellersRepository implements SellersRepository {
 		return seller;
 	}
 
+	public async findAll(): Promise<Seller[]> {
+		const { rows: sellers } = await this.pg.query<Seller>(`SELECT * FROM "Seller"`);
+
+		return sellers;
+	}
+
 	public async findByEmail(email: string): Promise<Seller | null> {
 		const {
 			rows: [seller],
