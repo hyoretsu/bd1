@@ -1,18 +1,18 @@
 import { Body, Controller, Delete, Get, Patch, Post, Put } from "@nestjs/common";
-import CreateProductDTO from "src/modules/product/dtos/CreateProduct";
-import DeleteProductDTO from "src/modules/product/dtos/DeleteClient";
-import FindProductDTO from "src/modules/product/dtos/FindProduct";
-import UpdateProductDTO from "src/modules/product/dtos/UpdateProduct";
-import Product from "src/modules/product/entities/Product";
-import CreateProduct from "src/modules/product/services/CreateProduct.service";
-import DeleteProduct from "src/modules/product/services/DeleteProduct.service";
-import EditProduct from "src/modules/product/services/EditProduct.service";
-import FindProduct from "src/modules/product/services/FindProducts.service";
-import GenerateReportProduct from "src/modules/product/services/GenerateReportProducts.service";
-import ListProducts from "src/modules/product/services/ListProducts.service";
 
+import CreateProductDTO from "@modules/product/dtos/CreateProduct";
+import DeleteProductDTO from "@modules/product/dtos/DeleteClient";
+import FindProductDTO from "@modules/product/dtos/FindProduct";
+import UpdateProductDTO from "@modules/product/dtos/UpdateProduct";
+import Product from "@modules/product/entities/Product";
+import CreateProduct from "@modules/product/services/CreateProduct.service";
+import DeleteProduct from "@modules/product/services/DeleteProduct.service";
+import EditProduct from "@modules/product/services/EditProduct.service";
+import FindProduct from "@modules/product/services/FindProducts.service";
+import GenerateReportProduct from "@modules/product/services/GenerateReportProducts.service";
+import ListProducts from "@modules/product/services/ListProducts.service";
 
-@Controller('products')
+@Controller("products")
 export default class ProductsController {
 	constructor(
 		private createProduct: CreateProduct,
@@ -49,7 +49,7 @@ export default class ProductsController {
 		return product;
 	}
 
-	@Post('find')
+	@Post("find")
 	async postProductFind(@Body() body: FindProductDTO): Promise<Product[]> {
 		const product = await this.findProduct.execute(body);
 
@@ -62,5 +62,4 @@ export default class ProductsController {
 
 		return report;
 	}
-
 }

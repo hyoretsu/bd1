@@ -1,16 +1,13 @@
 import { Inject } from "@nestjs/common";
-import ProductRepository, { ReportData } from "src/modules/product/repositories/products.repository";
-import { Pool } from 'pg';
-import CreateProductDTO from "src/modules/product/dtos/CreateProduct";
-import Product from "src/modules/product/entities/Product";
-import UpdateProductDTO from "src/modules/product/dtos/UpdateProduct";
+import { Pool } from "pg";
 
-
-
+import CreateProductDTO from "@modules/product/dtos/CreateProduct";
+import UpdateProductDTO from "@modules/product/dtos/UpdateProduct";
+import Product from "@modules/product/entities/Product";
+import ProductRepository, { ReportData } from "@modules/product/repositories/products.repository";
 
 export default class PostgresProductRepository implements ProductRepository {
-
-    constructor(@Inject("PG_CONNECTION") private pg: Pool) {
+	constructor(@Inject("PG_CONNECTION") private pg: Pool) {
 		this.setup();
 	}
 
@@ -66,7 +63,6 @@ export default class PostgresProductRepository implements ProductRepository {
 	}
 
 	public async findByName(name: string): Promise<Product | null> {
-
 		const {
 			rows: [product],
 		} = await this.pg.query<Product>(`SELECT * FROM "Product" WHERE "name" ILIKE '${name}'`);
@@ -130,5 +126,4 @@ export default class PostgresProductRepository implements ProductRepository {
 
 		return product;
 	}
-
 }

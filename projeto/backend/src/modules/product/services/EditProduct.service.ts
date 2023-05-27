@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import Product from "../entities/Product";
+
 import UpdateProductDTO from "../dtos/UpdateProduct";
+import Product from "../entities/Product";
 import ProductRepository from "../repositories/products.repository";
 
 @Injectable()
@@ -8,7 +9,6 @@ export default class EditProduct {
 	constructor(private productRepository: ProductRepository) {}
 
 	public async execute({ id, name, category, ...data }: UpdateProductDTO): Promise<Product> {
-
 		let product = await this.productRepository.findById(id);
 		if (!product) {
 			throw new HttpException("This product does not exist", HttpStatus.NOT_FOUND);
@@ -18,7 +18,7 @@ export default class EditProduct {
 			...data,
 			id,
 			name,
-            category
+			category,
 		});
 
 		return product;

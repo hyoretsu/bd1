@@ -1,11 +1,10 @@
-import { IsEmail, IsNumber, IsOptional, IsString, IsUUID, Min } from "class-validator";
+import { IsNotEmpty, IsOptional, IsString, IsUUID } from "class-validator";
 
 export default class UpdateProductDTO {
-
-	@IsOptional()
+	@IsNotEmpty()
 	@IsString()
 	@IsUUID()
-	id?: string;
+	id!: string;
 
 	@IsOptional()
 	@IsString()
