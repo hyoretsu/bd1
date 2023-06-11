@@ -3,7 +3,7 @@ import { Pool } from "pg";
 
 import CreateSellerDTO from "@modules/sellers/dtos/CreateSeller.dto";
 import Seller from "@modules/sellers/entities/Seller";
-import SellersRepository from "@modules/sellers/repositories/sellers.repository";
+import SellersRepository, { UpdateSellerPayload } from "@modules/sellers/repositories/sellers.repository";
 
 export default class PostgresSellersRepository implements SellersRepository {
 	constructor(@Inject("PG_CONNECTION") private pg: Pool) {
@@ -79,12 +79,12 @@ export default class PostgresSellersRepository implements SellersRepository {
 		return seller;
 	}
 
-	public async update({ id, ...data }: UpdateClientPayload): Promise<Client> {
+	public async update({ id, ...data }: UpdateSellerPayload): Promise<Seller> {
 		const {
-			rows: [client],
-		} = await this.pg.query<Client>(`
+			rows: [seller],
+		} = await this.pg.query<Seller>(`
                 UPDATE
-                    "Client"
+                    "Seller"
                 SET
                     ${Object.entries(data)
 						.map(([key, value]) => `"${key}" = '${value}'`)
@@ -93,6 +93,6 @@ export default class PostgresSellersRepository implements SellersRepository {
                     "id" = '${id}' RETURNING *
             `);
 
-		return client;
+		return seller;
 	}
 }
