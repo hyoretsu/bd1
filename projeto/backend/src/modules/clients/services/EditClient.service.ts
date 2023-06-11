@@ -1,9 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { compare, hash } from "bcrypt";
 
+import HashProvider from "../../shared/providers/HashProvider";
 import EditClientDTO from "../dtos/EditClient.dto";
 import Client from "../entities/Client";
-import HashProvider from "../providers/HashProvider";
 import ClientsRepository from "../repositories/clients.repository";
 
 @Injectable()

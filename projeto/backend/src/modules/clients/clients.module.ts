@@ -2,9 +2,9 @@ import { Module } from "@nestjs/common";
 
 import DatabaseModule from "@modules/database/database.module";
 
+import HashProvider, { hashProviderImplementations } from "../shared/providers/HashProvider";
 import ClientsController from "./infra/http/controllers/clients.controller";
 import PostgresClientsRepository from "./infra/postgres/repositories/clients.repository";
-import HashProvider, { hashProviderImplementations } from "./providers/HashProvider";
 import ClientsRepository from "./repositories/clients.repository";
 import CreateClient from "./services/CreateClient.service";
 import DeleteClient from "./services/DeleteClient.service";
