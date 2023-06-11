@@ -78,4 +78,21 @@ export default class PostgresSellersRepository implements SellersRepository {
 
 		return seller;
 	}
+
+	public async update({ id, ...data }: UpdateClientPayload): Promise<Client> {
+		const {
+			rows: [client],
+		} = await this.pg.query<Client>(`
+                UPDATE
+                    "Client"
+                SET
+                    ${Object.entries(data)
+						.map(([key, value]) => `"${key}" = '${value}'`)
+						.join(",")}
+                WHERE
+                    "id" = '${id}' RETURNING *
+            `);
+
+		return client;
+	}
 }
