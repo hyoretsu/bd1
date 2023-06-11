@@ -8,7 +8,6 @@ const FooterContainer = styled.footer`
   padding: 0;
   width: 100%;
   justify-content: flex-end;
-  margin-left: 30px;
 `;
 
 const StyledFooterSvg = styled(FooterSvg)`
