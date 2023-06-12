@@ -1,3 +1,5 @@
+import Item from "./Item";
+
 export default class Seller {
 	id!: string;
 	email!: string;
@@ -5,5 +7,6 @@ export default class Seller {
 	name!: string;
 	password!: string;
 	phoneNumber!: string;
+	stock!: Item[];
 	createdAt!: Date;
 }
