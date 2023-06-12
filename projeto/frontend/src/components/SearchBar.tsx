@@ -5,13 +5,13 @@ import SearchIcon from './icons/SearchIcon';
 const SearchBarContainer = styled.div`
   display: flex;
   margin: 0 auto;
-  width: 600px;
+  width: 50%;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
-  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.0);
+  padding: 2px;
   border-radius: 50px;
-  border: 0.5px solid rgba(127, 255, 212);
+  border: 1px solid rgba(0, 100, 0, 0.5);
 `;
 
 const SearchInput = styled.input`
@@ -19,9 +19,9 @@ const SearchInput = styled.input`
   padding: 10px 10px 10px 30px;
   border: none;
   border-radius: 20px;
-  background-color: rgba(200, 200, 200, 0.1);
+  background-color: rgba(200, 200, 200, 0.0);
   color: rgb(0, 100, 0);
-  font-size: 16px;
+  font-size: 18px;
   width: 100%;
 
   &::placeholder {
@@ -31,6 +31,7 @@ const SearchInput = styled.input`
     transform: translateY(-50%);
     transition: opacity 0.3s;
     pointer-events: none;
+    color: rgba(0, 0, 0, 0.5); /* Modify the color here */
   }
 
   &:focus::placeholder {
@@ -46,7 +47,7 @@ const SearchBar: React.FC = () => {
   return (
     <SearchBarContainer>
       <SearchIcon />
-      <SearchInput type="text" placeholder=" Pesquisar" />
+      <SearchInput type="text" placeholder="Insira sua busca aqui" />
     </SearchBarContainer>
   );
 };
