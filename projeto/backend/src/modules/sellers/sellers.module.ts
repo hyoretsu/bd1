@@ -4,7 +4,9 @@ import DatabaseModule from "@modules/database/database.module";
 
 import HashProvider, { hashProviderImplementations } from "../shared/providers/HashProvider";
 import SellersController from "./infra/http/controllers/sellers.controller";
+import PostgresItemsRepository from "./infra/postgres/repositories/items.repository";
 import PostgresSellersRepository from "./infra/postgres/repositories/sellers.repository";
+import ItemsRepository from "./repositories/items.repository";
 import SellersRepository from "./repositories/sellers.repository";
 import CreateSeller from "./services/CreateSeller.service";
 import DeleteSeller from "./services/DeleteSeller.service";
@@ -15,6 +17,10 @@ import ListSellers from "./services/ListSellers.service";
 	imports: [DatabaseModule],
 	controllers: [SellersController],
 	providers: [
+		{
+			provide: ItemsRepository,
+			useClass: PostgresItemsRepository,
+		},
 		{
 			provide: SellersRepository,
 			useClass: PostgresSellersRepository,

@@ -5,7 +5,7 @@ import CreateItemDTO from "@modules/sellers/dtos/CreateItem.dto";
 import Item from "@modules/sellers/entities/Item";
 import ItemsRepository from "@modules/sellers/repositories/items.repository";
 
-export default class PostgresSellersRepository implements ItemsRepository {
+export default class PostgresItemsRepository implements ItemsRepository {
 	constructor(@Inject("PG_CONNECTION") private pg: Pool) {
 		this.setup();
 	}
@@ -14,10 +14,10 @@ export default class PostgresSellersRepository implements ItemsRepository {
 		await this.pg.query(`
                 CREATE TABLE IF NOT EXISTS "Item" (
                     "id" VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
-                    "productId": VARCHAR(36),
-                    "sellerId": VARCHAR(36),
-                    "amount": INTEGER NOT NULL CHECK(amount >= 0),
-                    "price": FLOAT NOT NULL CHECK(price >= 0),
+                    "productId" VARCHAR(36),
+                    "sellerId" VARCHAR(36),
+                    "amount" INTEGER NOT NULL CHECK(amount >= 0),
+                    "price" FLOAT NOT NULL CHECK(price >= 0),
                     "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
                     CONSTRAINT "Item_productId_fkey" FOREIGN KEY("productId") REFERENCES "Product"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -43,6 +43,14 @@ export default class PostgresSellersRepository implements ItemsRepository {
 							.join(",")}
                     ) RETURNING *
         `);
+
+		return item;
+	}
+
+	public async findById(id: string): Promise<Item | null> {
+		const {
+			rows: [item],
+		} = await this.pg.query<Item>(`SELECT * FROM "Item" WHERE id = '${id}'`);
 
 		return item;
 	}
