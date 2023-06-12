@@ -38,6 +38,10 @@ export default class CreateOrder {
 				throw new HttpException("Este produto não pertence a esse vendedor", HttpStatus.BAD_REQUEST);
 			}
 
+			if (existingItem.amount === 0) {
+				throw new HttpException("Este produto está esgotado", HttpStatus.BAD_REQUEST);
+			}
+
 			if (existingItem.amount < item.amount) {
 				throw new HttpException(
 					"Não há unidades suficientes deste produto em estoque",
@@ -48,9 +52,14 @@ export default class CreateOrder {
 
 		const order = await this.ordersRepository.create({ clientId, sellerId });
 
+		let clientHasDiscount = false;
+		if (client.soccerTeam === "Flamengo" || client.onePiece === true || client.birthCity === "Sousa") {
+			clientHasDiscount = true;
+		}
+
 		for (const item of items) {
 			const orderItem = await this.ordersRepository.createItem({
-				amount: item.amount,
+				amount: item.amount * (Number(clientHasDiscount) * 0.9),
 				itemId: item.itemId,
 				orderId: order.id,
 			});
