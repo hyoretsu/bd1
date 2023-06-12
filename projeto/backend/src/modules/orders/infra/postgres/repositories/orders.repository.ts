@@ -114,4 +114,19 @@ export default class PostgresOrdersRepository implements OrdersRepository {
 
 		return orderPayment;
 	}
+
+	public async findOrdersBySeller(id: string): Promise<Order[]> {
+		const { rows: orders } = await this.pg.query<Order>(`
+            SELECT
+                *
+            FROM
+                "Order" o
+            WHERE
+                o.id = '${id}'
+            JOIN "OrderItem" oi ON oi."orderId" = o.id
+            JOIN "OrderPayment" op ON op.orderId = o.id
+        `);
+
+		return orders;
+	}
 }

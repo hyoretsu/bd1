@@ -13,4 +13,5 @@ export default abstract class OrdersRepository {
 	abstract create(data: Omit<CreateOrderDTO, "items" | "paymentMethod">): Promise<Order>;
 	abstract createItem(data: CreateOrderItemPayload): Promise<OrderItem>;
 	abstract createPayment(data: CreateOrderPaymentDTO): Promise<OrderPayment>;
+	abstract findOrdersBySeller(id: string): Promise<Order[]>;
 }

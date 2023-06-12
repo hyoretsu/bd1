@@ -6,6 +6,7 @@ import OrdersController from "./infra/http/controllers/orders.controller";
 import PostgresOrdersRepository from "./infra/postgres/repositories/orders.repository";
 import OrdersRepository from "./repositories/orders.repository";
 import CreateOrder from "./services/CreateOrder.service";
+import ListOrders from "./services/ListOrders.service";
 
 @Module({
 	imports: [DatabaseModule],
@@ -15,7 +16,7 @@ import CreateOrder from "./services/CreateOrder.service";
 			provide: OrdersRepository,
 			useClass: PostgresOrdersRepository,
 		},
-		...[CreateOrder],
+		...[CreateOrder, ListOrders],
 	],
 })
 export default class OrdersModule {}
