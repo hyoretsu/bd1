@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import MainContainer from '../../styles/MainContainer.styles';
-import Dashboard from '@/components/client-history/Dasboard';
+import KartComponent from '@/components/client-kart/Kart';
 
 const Content = styled.div`
   margin-top: auto;
@@ -22,16 +22,16 @@ const Content = styled.div`
   overflow-y: auto;
 `;
 
-const ClientHistory: React.FC = () => {
+const ClientKart: React.FC = () => {
   return (
     <MainContainer>
       <Header />
       <Content>
-        <Dashboard />
+        <KartComponent />
       </Content>
       <Footer />
     </MainContainer>
   );
 };
 
-export default ClientHistory;
+export default ClientKart;
