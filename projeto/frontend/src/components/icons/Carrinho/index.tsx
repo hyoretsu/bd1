@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Heart from '../../icons/heart.svg';
+import Carrinho from './carrinho.svg';
 
 const IconButton = styled.button`
   align-items: center;
@@ -10,12 +10,12 @@ const IconButton = styled.button`
   cursor: pointer;
 `;
 
-const HeartButton: React.FC = () => {
+const CarrinhoButton: React.FC = () => {
   return (
     <IconButton>
-      <Heart />
+      <Carrinho />
     </IconButton>
   );
 };
 
-export default HeartButton;
+export default CarrinhoButton;

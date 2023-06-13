@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    compiler: {styledComponents: true},
+
     webpack: (config, options) => {
         config.module.rules.push({
             test: /.svg$/,

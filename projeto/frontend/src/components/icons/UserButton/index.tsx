@@ -24,7 +24,7 @@ const Modal = styled.div`
   border-radius: 25px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: bottom 0.3s ease-in-out;
-  z-index: 3;
+  z-index: 100;
   display: ${(props) => (props.visible ? 'block' : 'none')};
   text-align: center; /* Centralizar o texto */
   width: 230px; /* Aumentar a largura */
@@ -62,6 +62,7 @@ const UserButton: React.FC = () => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
+    console.log('toggleModal');
     setModalVisible(!isModalVisible);
   };
 

@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import PedidoIcon from './icons/PedidoIcon';
 import SearchBar from './SearchBar';
 import UserButton from './icons/UserButton';
-import HeartButton from './icons/HeartButton';
+import CarrinhoButton from './icons/CarrinhoButton';
 
 const HeaderContainer = styled.header`
-  z-index: 4;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -52,7 +52,7 @@ const Header: React.FC = () => {
           <UserButton />
         </ButtonsContainer>
         <ButtonsContainer>
-          <HeartButton />
+          <CarrinhoButton />
         </ButtonsContainer>
         </ButtonsAlignDiv>
       </ScaledContainer>

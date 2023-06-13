@@ -15,7 +15,7 @@ const PedidoContainer = styled.div`
 const PedidoIcon: React.FC = () => {
   return (
     <PedidoContainer>
-      <a href="/caminho-do-link">
+      <a href="http://localhost:3000/">
         <Pedido />
       </a>
     </PedidoContainer>

@@ -15,24 +15,26 @@ import Image4 from '../assets/home/carrossel/4.png';
 import Image5 from '../assets/home/carrossel/5.png';
 
 const Content = styled.div`
-  z-index: 1;
+  z-index: 4;
   margin-top: auto;
-  margin-bottom: 20px; /* Adiciona um espaçamento de 20px na parte inferior */
-  max-height: 735px;
+  margin-bottom: 20px;
+  min-height: 735px;
   width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Ajusta o alinhamento do conteúdo ao topo */
+  justify-content: flex-start;
   background-image: url(${BgGreen.src});
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
   backdrop-filter: blur(1px);
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Adiciona a sombra nas laterais e na parte inferior */
-  margin: 0 auto; /* Centraliza o Content horizontalmente */
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  flex-grow: 1; // Permite que o Content cresça para preencher todo o espaço disponível
 `;
+
 
 const TopHomeDiv = styled.div`
   z-index: 3;
@@ -66,6 +68,7 @@ const CadastroButton = styled.button`
 `;
 
 const HomeContainerDiv = styled.div`
+  z-index: 1;
   width: 100%; /* Deve ocupar a largura total disponível */
   height: 100%; /* Deve ocupar a altura total disponível */
   display: flex;
@@ -115,12 +118,20 @@ const CarouselContainerDiv = styled.div`
 const CarouselDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 10px;
+  justify-content: center; // Centraliza os vendedores
+  gap: 25px;
   width: 100%;
-  padding: 3% 10%; // Adiciona o mesmo padding que TopHomeDiv
+  padding: 3% 10%; 
   font-family: Roboto;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
+
 
 const CarouselButton = styled.button`
   position: absolute;
@@ -202,7 +213,7 @@ const CardName = styled.div`
 `;
 
 
-const StoreCard = ({ image, name, showButtonPrev = false, showButtonNext = false }): React.JSX.Element => {
+const StoreCard = ({ image, name }): React.JSX.Element => {
   const [coords, setCoords] = React.useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e) => {
@@ -219,21 +230,44 @@ const StoreCard = ({ image, name, showButtonPrev = false, showButtonNext = false
       x={coords.x}
       y={coords.y}
     >
-      {showButtonPrev && (
-        <CarouselButtonPrev>{'⤎'}</CarouselButtonPrev>
-      )}
       <VendorInfoDiv>
         <CardImage src={image} />
         <CardName>{name}</CardName>
       </VendorInfoDiv>
-      {showButtonNext && (
-        <CarouselButtonNext>{'⤍'}</CarouselButtonNext>
-      )}
     </StoreDiv>
   );
 };
 
+
+const staticStoreData = [
+  { id: 1, image: Image1.src, name: 'Baratie' },
+  { id: 2, image: Image2.src, name: 'Ichikaru' },
+  { id: 3, image: Image3.src, name: 'Devil Fruit' },
+  { id: 4, image: Image4.src, name: 'Alchemist Coffe' },
+  { id: 5, image: Image5.src, name: 'Soupa Sayan' },
+  { id: 6, image: Image5.src, name: 'Soupa Sayan' },
+  { id: 6, image: Image5.src, name: 'Soupa Sayan' },
+  { id: 6, image: Image5.src, name: 'Soupa Sayan' },
+  { id: 6, image: Image5.src, name: 'Soupa Sayan' },
+  { id: 6, image: Image5.src, name: 'Soupa Sayan' },
+];
+
 const Home: React.FC = () => {
+  const carouselRef = React.useRef(null);
+  const [storeData, setStoreData] = React.useState(staticStoreData);
+
+  React.useEffect(() => {
+    fetch('/stores')
+      .then(response => response.json())
+      .then(data => setStoreData(storeData => storeData.concat(data)));
+  }, []);
+
+  const scrollCarousel = (direction) => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollLeft += direction === 'right' ? 300 : -300;
+    }
+  };
+
   return (
     <MainContainer>
       <Header />
@@ -247,13 +281,19 @@ const Home: React.FC = () => {
             <Image src={FoodImage.src} />
           </TopHomeDiv>
           <CarouselContainerDiv>
-              <CarouselDiv>
+              <CarouselDiv ref={carouselRef}>
               <VendorsTitleDiv>Lojas: </VendorsTitleDiv>
-                  <StoreCard image={Image1.src} name="Baratie" showButtonPrev={true}/>
-                  <StoreCard image={Image2.src} name="Ichikaru" />
-                  <StoreCard image={Image3.src} name="Devil Fruit" />
-                  <StoreCard image={Image4.src} name="Alchemist Coffe" />
-                  <StoreCard image={Image5.src} name="Soupa Sayan" showButtonNext={true}/>
+                  {storeData.map((store, index) => (
+                    <StoreCard
+                      key={store.id}
+                      image={store.image}
+                      name={store.name}
+                      showButtonPrev={index === 0}
+                      showButtonNext={index === storeData.length - 1}
+                      onClickPrev={() => scrollCarousel('left')}
+                      onClickNext={() => scrollCarousel('right')}
+                    />
+                  ))}
               </CarouselDiv>
           </CarouselContainerDiv>
         </HomeContainerDiv>
@@ -264,3 +304,4 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
