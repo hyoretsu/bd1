@@ -14,14 +14,10 @@ import Image3 from '../assets/home/carrossel/3.png';
 import Image4 from '../assets/home/carrossel/4.png';
 import Image5 from '../assets/home/carrossel/5.png';
 
-import ReactDOM from 'react-dom';
-import Routes from '../Routes/Routes.tsx';
-
 const Content = styled.div`
   z-index: 1;
   margin-top: auto;
   margin-bottom: 20px; /* Adiciona um espaçamento de 20px na parte inferior */
-  height: 100vh;
   max-height: 735px;
   width: 100%;
   position: relative;

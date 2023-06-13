@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '../pages/index';
-import VendorPage from '../pages/Seller';
+import VendorPage from '../pages/seller/Seller';
 
 const AppRoutes: React.FC = () => {
   return (

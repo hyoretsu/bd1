@@ -7,8 +7,9 @@ import BgGreen from '../../bgaux/bggreen.png';
 import RetangleLogin from '../../assets/login/RectangleLogin.png';
 import LogoPedido from '../../assets/login/LogoPedido.png';
 import WelcomeMessage from '../../assets/login/Message.png';
-import Login from '@/components/login/Login';
-import SingInForm from '@/components/login/Register';
+import ArrowBack from '../../assets/login/arrow-back.png';
+import Login from '@/components/client-login/Login';
+import SingInForm from '@/components/client-login/Register';
 
 const Content = styled.div`
   height: 100vh;
@@ -26,8 +27,8 @@ const Content = styled.div`
 
 const Popup = styled.div`
   background-color: white;
-  width: 75vh;
-  height: 80vh;
+  width: 100vh;
+  height: 85vh;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(2, 69, 64, 0.33);
   display: flex;
@@ -35,7 +36,7 @@ const Popup = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1;
+  z-index: 99;
 `;
 
 const LoginSection = styled.div`
@@ -47,6 +48,18 @@ const LoginSection = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+const ArrowBackImage = styled.img.attrs({
+  src: ArrowBack.src,
+  alt: "Voltar"
+})`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 `;
 
 const LogoImage = styled.img.attrs({
@@ -83,18 +96,19 @@ const LoginPage: React.FC = () => {
   return (
     <MainContainer>
       <Header />
+      <Popup>
+        <ArrowBackImage />
+        <LoginSection>
+          <LogoImage />
+          <WelcomeMessageImage />
+          <Login />
+        </LoginSection>
+        <SignupSection>
+          <SingupTitle>CRIE SUA CONTA</SingupTitle>
+          <SingInForm />
+        </SignupSection>
+      </Popup>
       <Content>
-        <Popup>
-          <LoginSection>
-            <LogoImage />
-            <WelcomeMessageImage />
-            <Login />
-          </LoginSection>
-          <SignupSection>
-            <SingupTitle>CRIE SUA CONTA</SingupTitle>
-            <SingInForm />
-          </SignupSection>
-        </Popup>
       </Content>
       <Footer />
     </MainContainer>

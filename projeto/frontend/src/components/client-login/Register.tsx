@@ -38,55 +38,60 @@ const Button = styled.button`
 `;
 
 const SignUpForm: React.FC = () => {
-  const [nome, setNome] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [celular, setCelular] = useState('');
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
-  const [nascimento, setNascimento] = useState('');
-  const [timeFutebol, setTimeFutebol] = useState('');
-  const [animeFavorito, setAnimeFavorito] = useState('');
+  const initialState = {
+    nome: '',
+    cpf: '',
+    celular: '',
+    email: '',
+    senha: '',
+    nascimento: '',
+    timeFutebol: '',
+    animeFavorito: ''
+  };
+
+  const [formData, setFormData] = useState(initialState);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Perform signup logic here
-    console.log({
-      nome,
-      cpf,
-      celular,
-      email,
-      senha,
-      nascimento,
-      timeFutebol,
-      animeFavorito
-    });
+    const allFieldsFilled = Object.values(formData).every((value) => value.trim() !== '');
+    if (allFieldsFilled) {
+      console.log(formData);
+      setFormData(initialState); // Reset form state to initial values
+    } else {
+      console.log('Please fill in all fields');
+    }
   };
 
   return (
     <FormContainer onSubmit={handleSubmit}>
       <Label>Nome:</Label>
-      <Input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
+      <Input type="text" name="nome" value={formData.nome} onChange={handleChange} />
 
       <Label>CPF:</Label>
-      <Input type="text" value={cpf} onChange={(e) => setCpf(e.target.value)} />
+      <Input type="text" name="cpf" value={formData.cpf} onChange={handleChange} />
 
       <Label>Celular:</Label>
-      <Input type="text" value={celular} onChange={(e) => setCelular(e.target.value)} />
+      <Input type="text" name="celular" value={formData.celular} onChange={handleChange} />
 
       <Label>E-mail:</Label>
-      <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <Input type="email" name="email" value={formData.email} onChange={handleChange} />
 
       <Label>Senha:</Label>
-      <Input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
+      <Input type="password" name="senha" value={formData.senha} onChange={handleChange} />
 
       <Label>Data de Nascimento:</Label>
-      <Input type="date" value={nascimento} onChange={(e) => setNascimento(e.target.value)} />
+      <Input type="date" name="nascimento" value={formData.nascimento} onChange={handleChange} />
 
       <Label>Time de Futebol:</Label>
-      <Input type="text" value={timeFutebol} onChange={(e) => setTimeFutebol(e.target.value)} />
+      <Input type="text" name="timeFutebol" value={formData.timeFutebol} onChange={handleChange} />
 
       <Label>Anime Favorito:</Label>
-      <Input type="text" value={animeFavorito} onChange={(e) => setAnimeFavorito(e.target.value)} />
+      <Input type="text" name="animeFavorito" value={formData.animeFavorito} onChange={handleChange} />
 
       <Button type="submit">Cadastrar</Button>
     </FormContainer>
@@ -94,3 +99,4 @@ const SignUpForm: React.FC = () => {
 };
 
 export default SignUpForm;
+
