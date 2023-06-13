@@ -33,7 +33,7 @@ const Popup = styled.div`
   box-shadow: 0 2px 4px rgba(2, 69, 64, 0.33);
   display: flex;
   position: absolute;
-  top: 50%;
+  top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 99;
@@ -92,7 +92,7 @@ const SingupTitle = styled.h2`
   color: #059B90;
 `;
 
-const LoginPage: React.FC = () => {
+const ClientLogin: React.FC = () => {
   return (
     <MainContainer>
       <Header />
@@ -115,4 +115,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default ClientLogin;
