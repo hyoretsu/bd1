@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import MainContainer from '../../styles/MainContainer.styles';
-import Dashboard from '@/components/client-history/Dasboard';
+import Products from '@/components/products/Products';
 import BgGreen from '../../bgaux/bggreen.png';
 
 const Content = styled.div`
@@ -23,16 +23,16 @@ const Content = styled.div`
   overflow-y: auto;
 `;
 
-const ClientHistory: React.FC = () => {
+const SellerOrder: React.FC = () => {
   return (
     <MainContainer>
       <Header />
       <Content>
-        <Dashboard />
+        <Products />
       </Content>
       <Footer />
     </MainContainer>
   );
 };
 
-export default ClientHistory;
+export default SellerOrder;

@@ -61,7 +61,7 @@ interface SellerCount {
   [key: string]: number;
 }
 
-const KartComponent: React.FC = () => {
+const CartComponent: React.FC = () => {
 
   const orderHistory = [
     {
@@ -131,4 +131,4 @@ const KartComponent: React.FC = () => {
   );
 };
 
-export default KartComponent;
+export default CartComponent;

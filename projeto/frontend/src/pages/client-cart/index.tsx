@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import MainContainer from '../../styles/MainContainer.styles';
-import KartComponent from '@/components/client-kart/Kart';
+import CartComponent from '@/components/client-cart/Cart';
+import BgGreen from '../../bgaux/bggreen.png';
 
 const Content = styled.div`
   margin-top: auto;
@@ -13,7 +14,7 @@ const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(70, 181, 174, 0.3);
+  background-image: url(${BgGreen.src});
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -22,16 +23,16 @@ const Content = styled.div`
   overflow-y: auto;
 `;
 
-const ClientKart: React.FC = () => {
+const ClientCart: React.FC = () => {
   return (
     <MainContainer>
       <Header />
       <Content>
-        <KartComponent />
+        <CartComponent />
       </Content>
       <Footer />
     </MainContainer>
   );
 };
 
-export default ClientKart;
+export default ClientCart;

@@ -28,7 +28,7 @@ const SubmitButton = styled.button`
   font-family: Roboto, sans-serif;
 `;
 
-const Login: React.FC = () => {
+const SellerLogin: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -59,4 +59,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default SellerLogin;
