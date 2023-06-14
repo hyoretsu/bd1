@@ -55,8 +55,7 @@ const FrostedGlassOverlay = styled.div`
 
 const Popup = styled.div`
   background-color: rgba(255, 255, 255, 0.2);
-  width: 75vh;
-  height: 75vh;
+  width: 100vh;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(2, 69, 64, 0.33);
   display: flex;
@@ -113,6 +112,7 @@ const SignupSection = styled.div`
 `;
 
 const SingupTitle = styled.h2`
+  margin-top: 5vh;
   font-family: quicksand, Roboto, sans-serif;
   color: #059B90;
 `;

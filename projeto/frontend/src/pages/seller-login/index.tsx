@@ -8,8 +8,6 @@ import RetangleLogin from '../../assets/login/RectangleLogin.png';
 import LogoPedido from '../../assets/login/LogoPedido.png';
 import WelcomeMessage from '../../assets/login/Message.png';
 import ArrowBack from '../../assets/login/arrow-back.png';
-import Login from '@/components/client-login/Login';
-import SingInForm from '@/components/client-login/Register';
 import SellerLogin from '@/components/seller-login/SellerLogin';
 import SellerSignUpForm from '@/components/seller-login/SellerRegister';
 

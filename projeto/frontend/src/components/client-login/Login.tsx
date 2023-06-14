@@ -8,8 +8,7 @@ const FormContainer = styled.form`
 `;
 
 const FormInput = styled.input`
-  width: 250px;
-  height: 40px;
+  width: 100%;
   border-radius: 20px;
   border: 1px solid #ccc;
   padding: 8px;
@@ -17,8 +16,8 @@ const FormInput = styled.input`
 `;
 
 const SubmitButton = styled.button`
-  width: 180px;
-  height: 40px;
+  width: 100%;
+  padding: 10px;
   border-radius: 10px;
   border: none;
   background-color: #059B90;

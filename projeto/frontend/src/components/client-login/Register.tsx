@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
+  padding: 10px;
   gap: 1px;
   align-items: center;
   justify-content: center;
