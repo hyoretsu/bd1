@@ -124,10 +124,11 @@ const OrderTitle = styled.div`
   justify-content: flex-start; 
   text-align: left; 
   font-weight: bold;
-  font-size: 20px;
+  font-size: 1.8rem;
   display: flex;
   font-family: quicksand, Roboto;
   width: 100%; 
+  height: auto;
 `;
 
 const VendorInfoDiv = styled.div`
@@ -345,6 +346,7 @@ const ProductsDiv = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   width: 100vh;
+  height: auto;
 `;
 
 const Divider = styled.div`
@@ -366,6 +368,7 @@ const DashboardItemDiv = styled.div`
   align-items: center;
   padding: 20px;
   width: 100%;
+  height: auto;
   margin-top: 1vh;
 `;
 
