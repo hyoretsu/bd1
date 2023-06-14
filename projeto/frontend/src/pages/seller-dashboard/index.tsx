@@ -345,16 +345,6 @@ const ProductsDiv = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   width: 100vh;
-  height: 20vh;
-`;
-
-const ProfitsDiv = styled.div`
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  width: 35vh;
-  margin-left: 2vh;
-  height: 27vh;
 `;
 
 const Divider = styled.div`
@@ -362,22 +352,9 @@ const Divider = styled.div`
   border-radius: 100px;
 `;
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; // você pode definir a altura que desejar
-`;
-
 const DashboardContainer = styled.div`
   display: flex;
   margin-left: -25px;
-`;
-
-const FontDash = styled.h3`
-  display: flex;
-  margin-left: 10px;
-  margin-bottom: 0px;
 `;
 
 const DashboardItemDiv = styled.div`
@@ -389,7 +366,6 @@ const DashboardItemDiv = styled.div`
   align-items: center;
   padding: 20px;
   width: 100%;
-  height: auto;
   margin-top: 1vh;
 `;
 

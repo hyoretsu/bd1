@@ -70,7 +70,6 @@ const RefuseButton = styled.button`
   border: none;
   border-radius: 36px;
   cursor: pointer;
-  height: 3vh;
   width: 20vh;
   background-color: #E80B26;
   color: white;
