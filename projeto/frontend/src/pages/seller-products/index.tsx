@@ -4,7 +4,8 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import MainContainer from '../../styles/MainContainer.styles';
 import BgGreen from '../../bgaux/bggreen.png';
-import SellerProducts from '@/components/seller-products/SellerProducts';
+
+import SellerProducts from '../../components/seller-products/SellerProducts';
 
 const Content = styled.div`
   margin-top: auto;

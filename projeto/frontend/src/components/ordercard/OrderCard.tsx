@@ -83,7 +83,6 @@ const AcceptButton = styled.button`
   border: none;
   border-radius: 36px;
   cursor: pointer;
-  height: 3vh;
   width: 20vh;
   background-color: #2CB6A9;
   color: white;
@@ -114,7 +113,7 @@ const OrderCard = ({ products }) => {
   return (
     <StoreDiv>
       <CardClient>
-        <div>Pedidos:</div>
+        <div>Pedidos {} </div>
       </CardClient>
       <ProductDetails>
         <Detail>

@@ -12,31 +12,56 @@ import Login from '@/components/client-login/Login';
 import SingInForm from '@/components/client-login/Register';
 
 const Content = styled.div`
-  height: 100vh;
+  z-index: 4;
+  margin-top: auto;
+  margin-bottom: 20px;
+  min-height: 735px;
   width: 100%;
-  position: relative;
+  position: relative; // Define a position relative para que BgGreenContainer possa se posicionar em relação a Content
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  flex-grow: 1;
+`;
+
+const BgGreenContainer = styled.div`
   background-image: url(${BgGreen.src});
-  background-size: 100% 100%;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  backdrop-filter: blur(1px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute; // Use absolute em vez de fixed
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%; // Define a largura para 100%
+  height: 100%; // Define a altura para 100%
+  z-index: 5;
+`;
+
+
+const FrostedGlassOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  backdrop-filter: blur(5px);
+  z-index: 10;
 `;
 
 const Popup = styled.div`
-  background-color: white;
-  width: 100vh;
-  height: 85vh;
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 75vh;
+  height: 75vh;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(2, 69, 64, 0.33);
   display: flex;
-  position: absolute;
-  top: 65%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 99;
+  position: relative;
+  z-index: 15;
 `;
 
 const LoginSection = styled.div`
@@ -96,19 +121,21 @@ const ClientLogin: React.FC = () => {
   return (
     <MainContainer>
       <Header />
-      <Popup>
-        <ArrowBackImage />
-        <LoginSection>
-          <LogoImage />
-          <WelcomeMessageImage />
-          <Login />
-        </LoginSection>
-        <SignupSection>
-          <SingupTitle>CRIE SUA CONTA</SingupTitle>
-          <SingInForm />
-        </SignupSection>
-      </Popup>
       <Content>
+        <BgGreenContainer />
+        <FrostedGlassOverlay />
+        <Popup>
+          <ArrowBackImage />
+          <LoginSection>
+            <LogoImage />
+            <WelcomeMessageImage />
+            <Login />
+          </LoginSection>
+          <SignupSection>
+            <SingupTitle>CRIE SUA CONTA</SingupTitle>
+            <SingInForm />
+          </SignupSection>
+        </Popup>
       </Content>
       <Footer />
     </MainContainer>
