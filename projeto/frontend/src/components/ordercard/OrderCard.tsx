@@ -65,6 +65,7 @@ const ButtonContainer = styled.div`
 `;
 
 const RefuseButton = styled.button`
+  padding: 1vh;
   font-size: 16px;
   font-weight: bold;
   border: none;
@@ -76,6 +77,7 @@ const RefuseButton = styled.button`
 `;
 
 const AcceptButton = styled.button`
+  padding: 1vh;
   margin-left: 2.5vh;
   font-size: 16px;
   font-weight: bold;
