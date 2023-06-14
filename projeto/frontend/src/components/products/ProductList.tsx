@@ -38,7 +38,7 @@ const QuantityContainer = styled.div`
 const QuantityButtonRemove = styled.button`
   padding: 5px;
   border-radius: 16px 0px 0px 16px;
-  background-color: red;
+  background-color: #E80B26;
 `;
 
 const QuantityText = styled.p`

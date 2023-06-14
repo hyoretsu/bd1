@@ -41,7 +41,7 @@ const QuantityText = styled.p`
 const RemoveProductButton = styled.button`
   width: 100%;
   padding: 8px;
-  background-color: red;
+  background-color: #E80B26;
   color: #fff;
   border: none;
   border-radius: 0px 0px 16px 16px;
