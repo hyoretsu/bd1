@@ -16,7 +16,6 @@ const Label = styled.label`
   font-size: 12px;
   align-self: flex-start;
   font-family: quicksand, Roboto, sans-serif;
-  color: 
 `;
 
 const Input = styled.input`

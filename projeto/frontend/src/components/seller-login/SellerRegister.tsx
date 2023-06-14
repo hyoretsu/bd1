@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
+  padding: 10px;
   gap: 1px;
   align-items: center; /* Center items horizontally */
   justify-content: center; /* Center items vertically */
@@ -18,10 +19,18 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
+  width: 100%; // Ajuste a largura conforme necessário
+  padding: 10px;
+  border: none;
+  font-size: 1.2em; // Ajuste o tamanho da fonte conforme necessário // Cor da borda para combinar com o tema
+  border-radius: 8px; // Bordas arredondadas para um visual moderno
+  outline: none; // Remove o realce padrão ao focar
+  transition: all 0.3s ease; // Suaviza a transição de estilos
+  background: rgba(255, 255, 255, 0.8);
+  // Estilo ao focar no campo de entrada
+  &:focus { // Muda a cor da borda ao focar
+    box-shadow: 0 0 10px #07948d3d; // Adiciona um brilho ao focar
+  }
 `;
 
 const Textarea = styled.textarea`
