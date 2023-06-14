@@ -8,7 +8,13 @@ import SellersRepository from "../repositories/sellers.repository";
 export default class ListItems {
 	constructor(private itemsRepository: ItemsRepository, private sellersRepository: SellersRepository) {}
 
-	public async execute(sellerId: string): Promise<Item[]> {
+	public async execute(sellerId?: string): Promise<Item[]> {
+		if (!sellerId) {
+			const items = await this.itemsRepository.findAll();
+
+			return items;
+		}
+
 		const seller = await this.sellersRepository.findById(sellerId);
 		if (!seller) {
 			throw new HttpException("This seller does not exist", HttpStatus.NOT_FOUND);

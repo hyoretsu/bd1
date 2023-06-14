@@ -50,8 +50,15 @@ export default class SellersController {
 		return seller;
 	}
 
+	@Get("items")
+	async getSellersItems(): Promise<Item[]> {
+		const items = await this.listItems.execute();
+
+		return items;
+	}
+
 	@Get("items/:id")
-	async getSellersItems(@Param("id") id: string): Promise<Item[]> {
+	async getSellersItemsId(@Param("id") id: string): Promise<Item[]> {
 		const items = await this.listItems.execute(id);
 
 		return items;

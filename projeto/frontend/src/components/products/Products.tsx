@@ -66,7 +66,6 @@ const Products: React.FC<ProductsProps> = ({ data }) => {
   const [priceFilter, setPriceFilter] = useState<string>('');
   const [nameFilter, setNameFilter] = useState<string>('');
   const [cityFilter, setCityFilter] = useState<string>('');
-  console.log(data)
 
   const handleCategoryChange = (value: string) => {
     setCategoryFilter(value);
@@ -121,7 +120,7 @@ const Products: React.FC<ProductsProps> = ({ data }) => {
             <Title>Baratie</Title>
           </Vendedor>
           <ProductListContainer>
-            <ProductList products={filteredProducts} />
+            <ProductList productsList={filteredProducts} />
           </ProductListContainer>
         </ProductsContainer>
       </ContentContainer>

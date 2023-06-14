@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import OrderComponent from './ClientOrder';
 import PaymentComponent from './Pagamento';
+import { useCart } from '@/context/cart';
+import api from '@/services/api';
 
 const TextStyle = createGlobalStyle`
   body {
@@ -43,31 +45,30 @@ const ReportTitle = styled.h2`
 
 
 const CartComponent: React.FC = () => {
+    const { products } = useCart();
+    const [cartProducts, setCartProducts] = useState([]);
 
-  const cartItems = [
-    {
-      id: 1,
-      product: 'Sanji Curry',
-      quantity: 2,
-      unitPrice: 50.00,
-      total: 100.00,
-    },
-    {
-      id: 2,
-      product: 'Beef Luffy',
-      quantity: 1,
-      unitPrice: 70.00,
-      total: 70.00,
-    },
-    // Add more items as needed
-  ];
- 
+    useEffect(()=>{
+        const execute = async () => {
+            const {data} = await api.get('/sellers/items');
+
+            const cartProductIds = Object.keys(products);
+            const actualProducts = data.filter(item => {
+                console.log(item.productId);
+               return !!cartProductIds.includes(item.productId)
+            })
+            setCartProducts(actualProducts);
+        };
+
+        execute();
+    },[products]);
+
   return (
     <Container>
       <TextStyle />
       <OrderHistory>
         <HistoryTitle>Carrinho</HistoryTitle>
-        <OrderComponent cartItems={cartItems} />
+        <OrderComponent cartItems={cartProducts} />
       </OrderHistory>
       <Report>
         <ReportTitle>Pagamento</ReportTitle>

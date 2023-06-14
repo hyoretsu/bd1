@@ -1,3 +1,4 @@
+import { useCart } from '@/context/cart';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -77,35 +78,21 @@ interface ProductListProps {
   products: Product[];
 }
 
-const ProductList: React.FC<ProductListProps> = ({ products }) => {
-  const [quantities, setQuantities] = useState<{ [productId: number]: number }>({});
-
-  const handleDecrease = (productId: number) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: (prevQuantities[productId] || 1) - 1,
-    }));
-  };
-
-  const handleIncrease = (productId: number) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: (prevQuantities[productId] || 0) + 1,
-    }));
-  };
+const ProductList: React.FC<ProductListProps> = ({ productsList }) => {
+    const {decreaseProduct,increaseProduct,products} = useCart();
 
   return (
     <>
-      {products.map((product) => (
+      {productsList.map((product) => (
         <ProductCard key={product.id}>
           {product.imageUrl&&<ProductImage src={product.imageUrl} alt={product.name} />}
           <ProductName>{product.name}</ProductName>
           <ProductPrice>R${product.price.toFixed(2)}</ProductPrice>
 
           <QuantityContainer>
-            <QuantityButtonRemove onClick={() => handleDecrease(product.id)}>-</QuantityButtonRemove>
-            <QuantityText>{quantities[product.id] || 0}</QuantityText>
-            <QuantityButtonAdd onClick={() => handleIncrease(product.id)}>+</QuantityButtonAdd>
+            <QuantityButtonRemove onClick={() => decreaseProduct(product.id)}>-</QuantityButtonRemove>
+            <QuantityText>{products[product.id] || 0}</QuantityText>
+            <QuantityButtonAdd onClick={() => increaseProduct(product.id)}>+</QuantityButtonAdd>
           </QuantityContainer>
 
           <AddToCartButton>Add Cart</AddToCartButton>

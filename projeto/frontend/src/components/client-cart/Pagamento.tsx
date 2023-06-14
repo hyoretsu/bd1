@@ -1,3 +1,4 @@
+import api from '@/services/api';
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import styled from 'styled-components';
 
@@ -69,9 +70,8 @@ const PaymentComponent = () => {
     setPaymentMethod(e.target.value);
   };
 
-  const handleGenerateClick = (option: string) => {
-    // Handle generating boleto, pix, or berries logic here
-    console.log(`Generating ${option}`);
+  const handleGenerateClick = async () => {
+    // await api.post('/orders');
   };
 
   return (
@@ -131,7 +131,7 @@ const PaymentComponent = () => {
         </PaymentForm>
       )}
       {paymentMethod && paymentMethod !== 'Card' && (
-        <Button onClick={() => handleGenerateClick(paymentMethod)}>
+        <Button onClick={handleGenerateClick}>
           Gerar Pagamento {paymentMethod}
         </Button>
       )}

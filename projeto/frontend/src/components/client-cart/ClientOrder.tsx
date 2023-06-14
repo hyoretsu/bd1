@@ -1,13 +1,6 @@
+import { useCart } from '@/context/cart';
 import React from 'react';
 import styled from 'styled-components';
-
-interface CartItem {
-  id: number;
-  product: string;
-  quantity: number;
-  unitPrice: number;
-  total: number;
-}
 
 interface CartComponentProps {
   cartItems: CartItem[];
@@ -57,8 +50,10 @@ const CartValues = styled.div`
 `
 
 const CartComponent: React.FC<CartComponentProps> = ({ cartItems }) => {
-  const subTotal = cartItems.reduce((sum, item) => sum + item.total, 0);
-  const discount = subTotal * 0.05;
+    const { products } = useCart();
+
+  const subTotal = cartItems.reduce((sum, item) => sum + item.price, 0);
+  const discount = subTotal * 0.1;
   const finalTotal = subTotal - discount;
 
   return (
@@ -69,14 +64,16 @@ const CartComponent: React.FC<CartComponentProps> = ({ cartItems }) => {
         <ColumnTitle>Preço Unitário</ColumnTitle>
         <ColumnTitle>Total</ColumnTitle>
       </CartItemContainer>
-      {cartItems.map((item) => (
+      {cartItems.map((item) => {
+        console.log(item);
+        return (
         <CartItemContainer key={item.id}>
-          <ProductName>{item.product}</ProductName>
-          <Quantity>{item.quantity}</Quantity>
-          <UnitPrice>R${item.unitPrice.toFixed(2)}</UnitPrice>
-          <Total>R${item.total.toFixed(2)}</Total>
+          <ProductName>{item.name}</ProductName>
+          <Quantity>{products[item.id]}</Quantity>
+          <UnitPrice>R${item.price.toFixed(2)}</UnitPrice>
+          <Total>R${(item.price*products[item.id]).toFixed(2)}</Total>
         </CartItemContainer>
-      ))}
+      )})}
       <CartValues>
         <CartItemContainer>
           <ProductName>Sub Total</ProductName>

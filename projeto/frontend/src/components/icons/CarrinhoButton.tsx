@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Carrinho from '../../icons/carrinho.svg';
+import { useRouter } from 'next/router';
 
 const IconButton = styled.button`
   align-items: center;
@@ -11,8 +12,9 @@ const IconButton = styled.button`
 `;
 
 const CarrinhoButton: React.FC = () => {
+    const{push}=useRouter();
   return (
-    <IconButton>
+    <IconButton onClick={()=>push('/cart')}>
       <Carrinho />
     </IconButton>
   );

@@ -48,6 +48,21 @@ export default class PostgresItemsRepository implements ItemsRepository {
 		return item;
 	}
 
+	public async findAll(): Promise<Item[]> {
+		const { rows: items } = await this.pg.query<Item>(`
+            SELECT
+                *
+            FROM
+                "Item" i
+            JOIN
+                "Product" p
+            ON
+                i."productId" = p.id
+        `);
+
+		return items;
+	}
+
 	public async findAllBySeller(id: string): Promise<Item[]> {
 		const { rows: items } = await this.pg.query<Item>(`
             SELECT
