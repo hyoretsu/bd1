@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+interface Product {
+  id: number;
+  name: string;
+  category: string;
+  price: number;
+  stock: number;
+  image: string;
+  city: string;
+}
+
 const ProductCard = styled.div`
   width: 25%;
   margin-bottom: 20px;
@@ -61,17 +71,21 @@ const AddToCartButton = styled.button`
   cursor: pointer;
 `;
 
-const ProductList = ({ products }) => {
-  const [quantities, setQuantities] = useState({});
+interface ProductListProps {
+  products: Product[];
+}
 
-  const handleDecrease = (productId) => {
+const ProductList: React.FC<ProductListProps> = ({ products }) => {
+  const [quantities, setQuantities] = useState<{ [productId: number]: number }>({});
+
+  const handleDecrease = (productId: number) => {
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
       [productId]: (prevQuantities[productId] || 1) - 1,
     }));
   };
 
-  const handleIncrease = (productId) => {
+  const handleIncrease = (productId: number) => {
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
       [productId]: (prevQuantities[productId] || 0) + 1,

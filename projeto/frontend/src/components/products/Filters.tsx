@@ -45,7 +45,18 @@ const FilterButton = styled.button`
   cursor: pointer;
 `;
 
+type Product = {
+  id: number;
+  name: string;
+  category: string;
+  price: number;
+  stock: number;
+  image: string;
+  city: string;
+};
+
 type FiltersProps = {
+  products: Product[];
   onCategoryChange: (value: string) => void;
   onStockChange: (value: string) => void;
   onPriceChange: (value: string) => void;
@@ -55,6 +66,7 @@ type FiltersProps = {
 };
 
 const Filters: React.FC<FiltersProps> = ({
+  products,
   onCategoryChange,
   onStockChange,
   onPriceChange,
@@ -68,64 +80,6 @@ const Filters: React.FC<FiltersProps> = ({
   const [nameFilter, setNameFilter] = useState('');
   const [cityFilter, setCityFilter] = useState('');
 
-  const products = [
-    {
-      id: 1,
-      name: 'Product 1',
-      category: 'Category A',
-      price: 10.99,
-      stock: 5,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
-      city: 'João Pessoa',
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      category: 'Category B',
-      price: 19.99,
-      stock: 10,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
-      city: 'Mari',
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      category: 'Category A',
-      price: 15.99,
-      stock: 8,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
-      city: 'São Paulo',
-    },
-    {
-      id: 4,
-      name: 'Product 4',
-      category: 'Category C',
-      price: 24.99,
-      stock: 2,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
-      city: 'Rio de Janeiro',
-    },
-    {
-      id: 5,
-      name: 'Product 5',
-      category: 'Category B',
-      price: 9.99,
-      stock: 12,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
-      city: 'Salvador',
-    },
-    {
-      id: 6,
-      name: 'Product 6',
-      category: 'Category A',
-      price: 7.99,
-      stock: 3,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
-      city: 'Recife',
-    },
-    // Add more products as needed
-  ];
-
   const allCategories = Array.from(new Set(products.map((product) => product.category)));
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -133,10 +87,10 @@ const Filters: React.FC<FiltersProps> = ({
     setCategoryFilter(value);
   };
 
-  const handleStockChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleStockChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setStockFilter(value);
-  };
+  };  
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -180,11 +134,7 @@ const Filters: React.FC<FiltersProps> = ({
       <FilterLabel>
         Estoque
         <br />
-        <FilterSelect value={stockFilter} onChange={handleStockChange}>
-          <option value="">Todos</option>
-          <option value="lastUnits">Últimas Unidades</option>
-          <option value="inStock">Em Estoque</option>
-        </FilterSelect>
+        <FilterInput type="number" value={stockFilter} onChange={handleStockChange} />
       </FilterLabel>
       <FilterLabel>
         Preço Máximo

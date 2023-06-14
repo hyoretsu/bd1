@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import styled from 'styled-components';
 
 const FormContainer = styled.div`
@@ -31,34 +31,47 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const ArrowButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+`;
+
 const SellerProductForm = () => {
+  const [isFormVisible, setIsFormVisible] = useState(false);
   const [productName, setProductName] = useState('');
   const [category, setCategory] = useState('');
   const [cityOrigin, setCityOrigin] = useState('');
   const [price, setPrice] = useState('');
   const [quantity, setQuantity] = useState('');
 
-  const handleProductNameChange = (event) => {
+  const handleProductNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setProductName(event.target.value);
   };
 
-  const handleCategoryChange = (event) => {
+  const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>) => {
     setCategory(event.target.value);
   };
 
-  const handleCityOriginChange = (event) => {
+  const handleCityOriginChange = (event: ChangeEvent<HTMLInputElement>) => {
     setCityOrigin(event.target.value);
   };
 
-  const handlePriceChange = (event) => {
+  const handlePriceChange = (event: ChangeEvent<HTMLInputElement>) => {
     setPrice(event.target.value);
   };
 
-  const handleQuantityChange = (event) => {
+  const handleQuantityChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuantity(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // Aqui você pode fazer algo com os valores do formulário, como enviar para o backend ou atualizar o estado do componente pai
@@ -78,32 +91,73 @@ const SellerProductForm = () => {
     setQuantity('');
   };
 
+  const toggleFormVisibility = () => {
+    setIsFormVisible(!isFormVisible);
+  };
+
   return (
     <FormContainer>
-      <h3>Cadastrar Produto</h3>
-      <form onSubmit={handleSubmit}>
-        <FormGroup>
-          <Label>Nome</Label>
-          <Input type="text" value={productName} onChange={handleProductNameChange} required />
-        </FormGroup>
-        <FormGroup>
-          <Label>Categoria</Label>
-          <Input type="text" value={category} onChange={handleCategoryChange} required />
-        </FormGroup>
-        <FormGroup>
-          <Label>Cidade de Origem</Label>
-          <Input type="text" value={cityOrigin} onChange={handleCityOriginChange} required />
-        </FormGroup>
-        <FormGroup>
-          <Label>Preço</Label>
-          <Input type="number" value={price} onChange={handlePriceChange} required />
-        </FormGroup>
-        <FormGroup>
-          <Label>Quantidade</Label>
-          <Input type="number" value={quantity} onChange={handleQuantityChange} required />
-        </FormGroup>
-        <Button type="submit">Cadastrar</Button>
-      </form>
+      <TitleContainer>
+        <h3>Cadastrar Produto</h3>
+        <ArrowButton onClick={toggleFormVisibility}>
+          {isFormVisible ? '▲' : '▼'}
+        </ArrowButton>
+      </TitleContainer>
+      {isFormVisible && (
+        <form onSubmit={handleSubmit}>
+          <FormGroup>
+            <Label htmlFor="productName">Nome</Label>
+            <Input
+              type="text"
+              id="productName"
+              value={productName}
+              onChange={handleProductNameChange}
+              required
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="category">Categoria</Label>
+            <Input
+              type="text"
+              id="category"
+              value={category}
+              onChange={handleCategoryChange}
+              required
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="cityOrigin">Cidade de Origem</Label>
+            <Input
+              type="text"
+              id="cityOrigin"
+              value={cityOrigin}
+              onChange={handleCityOriginChange}
+              required
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="price">Preço</Label>
+            <Input
+              type="number"
+              id="price"
+              value={price}
+              onChange={handlePriceChange}
+              required
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="quantity">Quantidade</Label>
+            <Input
+              type="number"
+              id="quantity"
+              value={quantity}
+              onChange={handleQuantityChange}
+              required
+            />
+          </FormGroup>
+          <Button type="submit">Cadastrar</Button>
+        </form>
+      )}
     </FormContainer>
   );
 };

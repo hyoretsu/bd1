@@ -41,87 +41,33 @@ const ReportTitle = styled.h2`
   padding-bottom: 10px;
 `;
 
-const ReportContent = styled.div`
-  margin-top: 16px;
-  line-height: 1.5;
-  background-color: white;
-  padding: 10px;
-  border-radius: 9px;
-  color: black;
-  font-weight: bold;
-
-  ul {
-    margin-left: 16px;
-    list-style-type: none; 
-    padding: 0; 
-  }
-`;
-
-interface SellerCount {
-  [key: string]: number;
-}
 
 const CartComponent: React.FC = () => {
 
-  const orderHistory = [
+  const cartItems = [
     {
       id: 1,
-      date: '2023-06-01',
-      status: 'Delivered',
-      items: [
-        { name: 'Sanji Curry', quantity: 2 },
-        { name: 'Beef Luffy', quantity: 1 },
-      ],
-      total: 100,
-      image:
-        'https://resize.cdn.otakumode.com/ex/1200.680/u/7742006de8354858a9929f0a90167be0.jpg',
-      sellername: 'Baratie',
+      product: 'Sanji Curry',
+      quantity: 2,
+      unitPrice: 50.00,
+      total: 100.00,
     },
     {
       id: 2,
-      date: '2023-05-28',
-      status: 'Canceled',
-      items: [{ name: 'Sanji Curry', quantity: 3 }],
-      total: 150,
-      image:
-        'https://resize.cdn.otakumode.com/ex/1200.680/u/7742006de8354858a9929f0a90167be0.jpg',
-      sellername: 'Baratie',
+      product: 'Beef Luffy',
+      quantity: 1,
+      unitPrice: 70.00,
+      total: 70.00,
     },
-    {
-      id: 3,
-      date: '2023-05-25',
-      status: 'In Progress',
-      items: [
-        { name: 'Sanji Curry', quantity: 1 },
-        { name: 'Beef Luffy', quantity: 2 },
-      ],
-      total: 200,
-      image:
-        'https://resize.cdn.otakumode.com/ex/1200.680/u/7742006de8354858a9929f0a90167be0.jpg',
-      sellername: 'Baratie',
-    },
+    // Add more items as needed
   ];
-  
-  const totalOrders = orderHistory.length;
-  
-  const totalSum = orderHistory.reduce((sum, order) => sum + order.total, 0);
-  
-  const sellers = orderHistory.map((order) => order.sellername);
-  const mostCommonSeller: SellerCount = sellers.reduce((acc: SellerCount, seller) => {
-    if (!acc[seller]) {
-      acc[seller] = 1;
-    } else {
-      acc[seller] += 1;
-    }
-    return acc;
-  }, {});
  
   return (
     <Container>
       <TextStyle />
       <OrderHistory>
         <HistoryTitle>Carrinho</HistoryTitle>
-        <OrderComponent />
+        <OrderComponent cartItems={cartItems} />
       </OrderHistory>
       <Report>
         <ReportTitle>Pagamento</ReportTitle>

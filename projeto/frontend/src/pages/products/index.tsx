@@ -23,16 +23,74 @@ const Content = styled.div`
   overflow-y: auto;
 `;
 
-const SellerOrder: React.FC = () => {
+const ProductsPage: React.FC = () => {
+
+  const products = [
+    {
+      id: 1,
+      name: 'Product 1',
+      category: 'Category A',
+      price: 10.99,
+      stock: 5,
+      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
+      city: 'João Pessoa',
+    },
+    {
+      id: 2,
+      name: 'Product 2',
+      category: 'Category B',
+      price: 19.99,
+      stock: 10,
+      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
+      city: 'Mari',
+    },
+    {
+      id: 3,
+      name: 'Product 3',
+      category: 'Category A',
+      price: 15.99,
+      stock: 8,
+      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
+      city: 'São Paulo',
+    },
+    {
+      id: 4,
+      name: 'Product 4',
+      category: 'Category C',
+      price: 24.99,
+      stock: 2,
+      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
+      city: 'Rio de Janeiro',
+    },
+    {
+      id: 5,
+      name: 'Product 5',
+      category: 'Category B',
+      price: 9.99,
+      stock: 12,
+      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
+      city: 'Salvador',
+    },
+    {
+      id: 6,
+      name: 'Product 6',
+      category: 'Category A',
+      price: 7.99,
+      stock: 3,
+      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
+      city: 'Recife',
+    },
+  ];
+
   return (
     <MainContainer>
       <Header />
       <Content>
-        <Products />
+        <Products data={products} />
       </Content>
       <Footer />
     </MainContainer>
   );
 };
 
-export default SellerOrder;
+export default ProductsPage;
