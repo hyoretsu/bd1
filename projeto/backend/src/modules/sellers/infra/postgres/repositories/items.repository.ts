@@ -2,6 +2,7 @@ import { Inject } from "@nestjs/common";
 import { Pool } from "pg";
 
 import CreateItemDTO from "@modules/sellers/dtos/CreateItem.dto";
+import EditItemDTO from "@modules/sellers/dtos/EditItem.dto";
 import Item from "@modules/sellers/entities/Item";
 import ItemsRepository from "@modules/sellers/repositories/items.repository";
 
@@ -65,11 +66,29 @@ export default class PostgresItemsRepository implements ItemsRepository {
             SELECT
                 *
             FROM
-                "Seller"
+                "Item"
             WHERE
                 "productId" = '${productId}'
                 AND "sellerId" = '${sellerId}'
         `);
+
+		return item;
+	}
+
+	public async update({ itemId, ...data }: EditItemDTO): Promise<Item> {
+		const {
+			rows: [item],
+		} = await this.pg.query<Item>(`
+                UPDATE
+                    "Item"
+                SET
+                    ${Object.entries(data)
+						.map(([key, value]) => `"${key}" = '${value}'`)
+						.join(",")}
+                WHERE
+                    "id" = '${itemId}'
+                RETURNING *
+            `);
 
 		return item;
 	}

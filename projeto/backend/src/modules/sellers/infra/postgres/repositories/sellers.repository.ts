@@ -29,7 +29,7 @@ export default class PostgresSellersRepository implements SellersRepository {
 			rows: [seller],
 		} = await this.pg.query<Seller>(`
                 INSERT INTO
-                    "Client" (
+                    "Seller" (
                         ${Object.keys(data)
 							.map(key => `"${key}"`)
 							.join(",")}
