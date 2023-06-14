@@ -27,7 +27,7 @@ const OrderHistory = styled.div`
 const HistoryTitle = styled.h2`
   border-bottom: 1px solid #C8C9CB;
   padding-bottom: 10px;
-`
+`;
 
 const Report = styled.div`
   flex: 1;
@@ -48,6 +48,7 @@ const ReportContent = styled.div`
   border-radius: 9px;
   color: black;
   font-weight: bold;
+  margin-bottom: 10px;
 
   ul {
     margin-left: 16px;
@@ -60,51 +61,28 @@ interface SellerCount {
   [key: string]: number;
 }
 
-const Dashboard: React.FC = () => {
+interface UserData {
+  [key: string]: string;
+}
 
-  const orderHistory = [
-    {
-      id: 1,
-      date: '2023-06-01',
-      status: 'Delivered',
-      items: [
-        { name: 'Sanji Curry', quantity: 2 },
-        { name: 'Beef Luffy', quantity: 1 },
-      ],
-      total: 100,
-      image:
-        'https://resize.cdn.otakumode.com/ex/1200.680/u/7742006de8354858a9929f0a90167be0.jpg',
-      sellername: 'Baratie',
-    },
-    {
-      id: 2,
-      date: '2023-05-28',
-      status: 'Canceled',
-      items: [{ name: 'Sanji Curry', quantity: 3 }],
-      total: 150,
-      image:
-        'https://resize.cdn.otakumode.com/ex/1200.680/u/7742006de8354858a9929f0a90167be0.jpg',
-      sellername: 'Baratie',
-    },
-    {
-      id: 3,
-      date: '2023-05-25',
-      status: 'In Progress',
-      items: [
-        { name: 'Sanji Curry', quantity: 1 },
-        { name: 'Beef Luffy', quantity: 2 },
-      ],
-      total: 200,
-      image:
-        'https://resize.cdn.otakumode.com/ex/1200.680/u/7742006de8354858a9929f0a90167be0.jpg',
-      sellername: 'Baratie',
-    },
-  ];
-  
+interface DashboardProps {
+  orderHistory: {
+    id: number;
+    date: string;
+    status: string;
+    items: { name: string; quantity: number }[];
+    total: number;
+    image: string;
+    sellername: string;
+  }[];
+  userData: UserData;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ orderHistory, userData }) => {
   const totalOrders = orderHistory.length;
-  
+
   const totalSum = orderHistory.reduce((sum, order) => sum + order.total, 0);
-  
+
   const sellers = orderHistory.map((order) => order.sellername);
   const mostCommonSeller: SellerCount = sellers.reduce((acc: SellerCount, seller) => {
     if (!acc[seller]) {
@@ -114,13 +92,13 @@ const Dashboard: React.FC = () => {
     }
     return acc;
   }, {});
- 
+
   return (
     <Container>
       <TextStyle />
       <OrderHistory>
         <HistoryTitle>Histórico de Pedidos</HistoryTitle>
-        <OrderHistoryComponent />
+        <OrderHistoryComponent orderHistory={orderHistory} />
       </OrderHistory>
       <Report>
         <ReportTitle>Curiosidades</ReportTitle>
@@ -129,6 +107,14 @@ const Dashboard: React.FC = () => {
             <li>Total de Pedidos: {totalOrders}</li>
             <li>Total Gasto: {totalSum}</li>
             <li>Vendedor Favorito: {Object.entries(mostCommonSeller)[0]?.[0]}</li>
+          </ul>
+        </ReportContent>
+        <ReportTitle>Dados Cadastrais</ReportTitle>
+        <ReportContent>
+          <ul>
+            {Object.entries(userData).map(([key, value]) => (
+              <li key={key}>{key}: {value}</li>
+            ))}
           </ul>
         </ReportContent>
       </Report>

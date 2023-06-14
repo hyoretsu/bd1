@@ -28,7 +28,7 @@ const ProductListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
-`
+`;
 
 const ProductsContainer = styled.div`
   display: flex;
@@ -39,111 +39,75 @@ const ProductsContainer = styled.div`
 const Vendedor = styled.div`
   width: 100%;
   padding: 10px;
-`
+`;
 
 const Title = styled.h3`
   flex: 1;
   border-bottom: 1px solid #C8C9CB;
   padding: 10px;
-`
+`;
 
-const Products = () => {
-  const [categoryFilter, setCategoryFilter] = useState('');
-  const [stockFilter, setStockFilter] = useState('');
-  const [priceFilter, setPriceFilter] = useState('');
-  const [nameFilter, setNameFilter] = useState('');
-  const [cityFilter, setCityFilter] = useState('');
+interface Product {
+  id: number;
+  name: string;
+  category: string;
+  price: number;
+  stock: number;
+  image: string;
+  city: string;
+}
 
-  const handleCategoryChange = (value) => {
+interface ProductsProps {
+  data: Product[];
+}
+
+const Products: React.FC<ProductsProps> = ({ data }) => {
+  const [categoryFilter, setCategoryFilter] = useState<string>('');
+  const [stockFilter, setStockFilter] = useState<string>('');
+  const [priceFilter, setPriceFilter] = useState<string>('');
+  const [nameFilter, setNameFilter] = useState<string>('');
+  const [cityFilter, setCityFilter] = useState<string>('');
+
+  const handleCategoryChange = (value: string) => {
     setCategoryFilter(value);
   };
 
-  const handleStockChange = (value) => {
+  const handleStockChange = (value: string) => {
     setStockFilter(value);
   };
+  
 
-  const handlePriceChange = (value) => {
+  const handlePriceChange = (value: string) => {
     setPriceFilter(value);
   };
 
-  const handleNameChange = (value) => {
+  const handleNameChange = (value: string) => {
     setNameFilter(value);
   };
 
-  const handleCityChange = (value) => {
+  const handleCityChange = (value: string) => {
     setCityFilter(value);
   };
 
-  const products = [
-    {
-      id: 1,
-      name: 'Product 1',
-      category: 'Category A',
-      price: 10.99,
-      stock: 5,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
-      city: 'João Pessoa',
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      category: 'Category B',
-      price: 19.99,
-      stock: 10,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
-      city: 'Mari',
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      category: 'Category A',
-      price: 15.99,
-      stock: 8,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
-      city: 'São Paulo',
-    },
-    {
-      id: 4,
-      name: 'Product 4',
-      category: 'Category C',
-      price: 24.99,
-      stock: 2,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
-      city: 'Rio de Janeiro',
-    },
-    {
-      id: 5,
-      name: 'Product 5',
-      category: 'Category B',
-      price: 9.99,
-      stock: 12,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
-      city: 'Salvador',
-    },
-    {
-      id: 6,
-      name: 'Product 6',
-      category: 'Category A',
-      price: 7.99,
-      stock: 3,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
-      city: 'Recife',
-    },
-    // Add more products as needed
-  ];
-
-  const filteredProducts = products
-    .filter((product) => (categoryFilter ? product.category === categoryFilter : true))
-    .filter((product) => (stockFilter ? product.stock > 0 : true))
-    .filter((product) => (priceFilter ? product.price < parseFloat(priceFilter) : true))
-    .filter((product) => (nameFilter ? product.name.toLowerCase().includes(nameFilter.toLowerCase()) : true))
-    .filter((product) => (cityFilter ? product.city.toLowerCase().includes(cityFilter.toLowerCase()) : true));
+  const filteredProducts = data.filter((product) => {
+    const isCategoryMatched = categoryFilter ? product.category === categoryFilter : true;
+    const isStockMatched = stockFilter ? product.stock < parseInt(stockFilter): true;
+    const isPriceMatched = priceFilter ? product.price < parseFloat(priceFilter) : true;
+    const isNameMatched = nameFilter
+      ? product.name.toLowerCase().includes(nameFilter.toLowerCase())
+      : true;
+    const isCityMatched = cityFilter
+      ? product.city.toLowerCase().includes(cityFilter.toLowerCase())
+      : true;
+    return isCategoryMatched && isStockMatched && isPriceMatched && isNameMatched && isCityMatched;
+  });
 
   return (
     <PageContainer>
       <ContentContainer>
         <FiltersContainer>
           <Filters
+            products={data}
             onCategoryChange={handleCategoryChange}
             onStockChange={handleStockChange}
             onPriceChange={handlePriceChange}
@@ -154,7 +118,7 @@ const Products = () => {
         </FiltersContainer>
         <ProductsContainer>
           <Vendedor>
-            <Title>Baratie</Title> {/* Novo contêiner para o título */}
+            <Title>Baratie</Title>
           </Vendedor>
           <ProductListContainer>
             <ProductList products={filteredProducts} />

@@ -1,11 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 
+interface CartItem {
+  id: number;
+  product: string;
+  quantity: number;
+  unitPrice: number;
+  total: number;
+}
+
+interface CartComponentProps {
+  cartItems: CartItem[];
+}
+
 const CartContainer = styled.div`
   border-top: 1px solid #004742;
 `;
 
-const CartItem = styled.div`
+const CartItemContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -44,58 +56,40 @@ const CartValues = styled.div`
   border-bottom: 1px solid #004742;
 `
 
-const CartComponent = () => {
-  const cartItems = [
-    {
-      id: 1,
-      product: 'Sanji Curry',
-      quantity: 2,
-      unitPrice: 50.00,
-      total: 100.00,
-    },
-    {
-      id: 2,
-      product: 'Beef Luffy',
-      quantity: 1,
-      unitPrice: 70.00,
-      total: 70.00,
-    },
-    // Add more items as needed
-  ];
-
+const CartComponent: React.FC<CartComponentProps> = ({ cartItems }) => {
   const subTotal = cartItems.reduce((sum, item) => sum + item.total, 0);
   const discount = subTotal * 0.05;
   const finalTotal = subTotal - discount;
 
   return (
     <CartContainer>
-      <CartItem>
+      <CartItemContainer>
         <ColumnTitle>Produto</ColumnTitle>
         <ColumnTitle>Quantidade</ColumnTitle>
         <ColumnTitle>Preço Unitário</ColumnTitle>
         <ColumnTitle>Total</ColumnTitle>
-      </CartItem>
+      </CartItemContainer>
       {cartItems.map((item) => (
-        <CartItem key={item.id}>
+        <CartItemContainer key={item.id}>
           <ProductName>{item.product}</ProductName>
           <Quantity>{item.quantity}</Quantity>
           <UnitPrice>R${item.unitPrice.toFixed(2)}</UnitPrice>
           <Total>R${item.total.toFixed(2)}</Total>
-        </CartItem>
+        </CartItemContainer>
       ))}
       <CartValues>
-        <CartItem>
+        <CartItemContainer>
           <ProductName>Sub Total</ProductName>
           <Total>R${subTotal.toFixed(2)}</Total>
-        </CartItem>
-        <CartItem>
+        </CartItemContainer>
+        <CartItemContainer>
           <ProductName>Desconto</ProductName>
           <Total>R${discount.toFixed(2)}</Total>
-        </CartItem>
-        <CartItem>
+        </CartItemContainer>
+        <CartItemContainer>
           <ProductName>Valor Final</ProductName>
           <Total>R${finalTotal.toFixed(2)}</Total>
-        </CartItem>
+        </CartItemContainer>
       </CartValues>
     </CartContainer>
   );

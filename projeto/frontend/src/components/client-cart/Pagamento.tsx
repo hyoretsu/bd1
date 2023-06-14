@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import styled from 'styled-components';
 
 const PaymentSection = styled.section`
@@ -54,22 +54,22 @@ const Button = styled.button`
 `;
 
 const PaymentComponent = () => {
-  const [fullName, setFullName] = useState('');
-  const [cardNumber, setCardNumber] = useState('');
-  const [expirationDate, setExpirationDate] = useState('');
-  const [cvc, setCVC] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('Card');
+  const [fullName, setFullName] = useState<string>('');
+  const [cardNumber, setCardNumber] = useState<string>('');
+  const [expirationDate, setExpirationDate] = useState<string>('');
+  const [cvc, setCVC] = useState<string>('');
+  const [paymentMethod, setPaymentMethod] = useState<string>('Card');
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
     // Handle form submission logic here
   };
 
-  const handlePaymentMethodChange = (e) => {
+  const handlePaymentMethodChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setPaymentMethod(e.target.value);
   };
 
-  const handleGenerateClick = (option) => {
+  const handleGenerateClick = (option: string) => {
     // Handle generating boleto, pix, or berries logic here
     console.log(`Generating ${option}`);
   };
@@ -77,7 +77,7 @@ const PaymentComponent = () => {
   return (
     <PaymentSection>
       <FormField>
-      <Label>Forma de Pagamento</Label>
+        <Label>Forma de Pagamento</Label>
         <Select value={paymentMethod} onChange={handlePaymentMethodChange}>
           <option value="Card">Card</option>
           <option value="Boleto">Boleto</option>
@@ -92,7 +92,9 @@ const PaymentComponent = () => {
             <Input
               type="text"
               value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setFullName(e.target.value)
+              }
             />
           </FormField>
           <FormField>
@@ -100,7 +102,9 @@ const PaymentComponent = () => {
             <Input
               type="text"
               value={cardNumber}
-              onChange={(e) => setCardNumber(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setCardNumber(e.target.value)
+              }
             />
           </FormField>
           <FormField>
@@ -108,7 +112,9 @@ const PaymentComponent = () => {
             <Input
               type="text"
               value={expirationDate}
-              onChange={(e) => setExpirationDate(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setExpirationDate(e.target.value)
+              }
             />
           </FormField>
           <FormField>
@@ -116,7 +122,9 @@ const PaymentComponent = () => {
             <Input
               type="text"
               value={cvc}
-              onChange={(e) => setCVC(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setCVC(e.target.value)
+              }
             />
           </FormField>
           <Button type="submit">Submeter Pagamento</Button>
