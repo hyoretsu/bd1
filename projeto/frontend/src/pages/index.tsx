@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -7,12 +7,8 @@ import BemVindo from '../components/BemVindo';
 import MainContainer from '../styles/MainContainer.styles';
 import BgGreen from '../bgaux/bggreen.png';
 import FoodImage from '../assets/home/food.png';
-
-import Image1 from '../assets/home/carrossel/1.png';
-import Image2 from '../assets/home/carrossel/2.png';
-import Image3 from '../assets/home/carrossel/3.png';
-import Image4 from '../assets/home/carrossel/4.png';
-import Image5 from '../assets/home/carrossel/5.png';
+import api from '@/services/api';
+import { useRouter } from 'next/router';
 
 const Content = styled.div`
   z-index: 4;
@@ -39,9 +35,9 @@ const Content = styled.div`
 const TopHomeDiv = styled.div`
   z-index: 3;
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: flex-start; /* Alinha todos os filhos ao topo */
-  padding: 0 10%; 
+  padding: 0 10%;
   height: auto;
   width: 100%;
   margin-top: 6.5%;
@@ -95,13 +91,13 @@ const Image = styled.img`
 const VendorsTitleDiv = styled.div`
   padding: 0 0 2px 25px; // reduzido o padding superior
   color: rgba(0, 0, 0, 0.7);
-  justify-content: flex-start; 
-  text-align: left; 
+  justify-content: flex-start;
+  text-align: left;
   font-weight: bold;
   font-size: 20px;
   display: flex;
   font-family: quicksand, Roboto;
-  width: 100%; 
+  width: 100%;
 `;
 
 
@@ -121,7 +117,7 @@ const CarouselDiv = styled.div`
   justify-content: center; // Centraliza os vendedores
   gap: 25px;
   width: 100%;
-  padding: 3% 10%; 
+  padding: 3% 10%;
   font-family: quicksand, Roboto;
   overflow-x: scroll;
   scrollbar-width: none;
@@ -136,7 +132,6 @@ const StoreDiv = styled.div`
   perspective: 1500px;
   background-color: rgba(255, 255, 255, 0.2);
   text-align: center;
-  height: 191px;
   max-height: 100%;
   cursor: pointer;
   width: 264px;
@@ -165,8 +160,9 @@ const VendorInfoDiv = styled.div`
 
 const CardImage = styled.img`
   width: 100%;
-  height: 100%; // Faz com que a imagem cubra toda a altura da div
+  height: 70%; // Faz com que a imagem cubra toda a altura da div
   object-fit: cover; // Assegura que a imagem cubra toda a div, mesmo se as proporções da imagem não corresponderem às da div
+  border-radius: 30px 30px 0 0;
 `;
 
 const CardName = styled.div`
@@ -205,28 +201,18 @@ const StoreCard = ({ image, name }): React.JSX.Element => {
   );
 };
 
-
-const staticStoreData = [
-  { id: 1, image: Image1.src, name: 'Baratie' },
-  { id: 2, image: Image2.src, name: 'Ichikaru' },
-  { id: 3, image: Image3.src, name: 'Devil Fruit' },
-  { id: 4, image: Image4.src, name: 'Alchemist Coffe' },
-  { id: 5, image: Image5.src, name: 'Soupa Sayan' },
-  { id: 6, image: Image5.src, name: 'Soupa Sayan' },
-  { id: 6, image: Image5.src, name: 'Soupa Sayan' },
-  { id: 6, image: Image5.src, name: 'Soupa Sayan' },
-  { id: 6, image: Image5.src, name: 'Soupa Sayan' },
-  { id: 6, image: Image5.src, name: 'Soupa Sayan' },
-];
-
 const Home: React.FC = () => {
+    const {push} = useRouter();
   const carouselRef = React.useRef(null);
-  const [storeData, setStoreData] = React.useState(staticStoreData);
+  const [storeData, setStoreData] = React.useState([]);
 
-  React.useEffect(() => {
-    fetch('/stores')
-      .then(response => response.json())
-      .then(data => setStoreData(storeData => storeData.concat(data)));
+  useEffect(() => {
+    const execute =async ()=>{
+        const {data} = await api.get('/sellers');
+        setStoreData(data);
+    }
+
+    execute();
   }, []);
 
   return (
@@ -247,8 +233,9 @@ const Home: React.FC = () => {
                   {storeData.map((store, index) => (
                     <StoreCard
                       key={store.id}
-                      image={store.image}
+                      image={store.logoUrl}
                       name={store.name}
+                      onClick={()=> push('/seller')}
                     />
                   ))}
               </CarouselDiv>
