@@ -32,51 +32,23 @@ const QuantityContainer = styled.div`
   border-radius: 16px;
   margin-top: 10px;
   margin-bottom: 10px;
-  background-color: lightblue;
-`;
-
-const QuantityButtonRemove = styled.button`
-  padding: 5px;
-  border-radius: 16px 0px 0px 16px;
-  background-color: red;
 `;
 
 const QuantityText = styled.p`
   padding: 5px;
 `
 
-const QuantityButtonAdd = styled.button`
-  padding: 5px;
-  border-radius: 0px 16px 16px 0px;
-  background-color: green;
-`;
-
-const AddToCartButton = styled.button`
+const RemoveProductButton = styled.button`
   width: 100%;
   padding: 8px;
-  background-color: #059B90;
+  background-color: red;
   color: #fff;
   border: none;
   border-radius: 0px 0px 16px 16px;
   cursor: pointer;
 `;
 
-const ProductList = ({ products }) => {
-  const [quantities, setQuantities] = useState({});
-
-  const handleDecrease = (productId) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: (prevQuantities[productId] || 1) - 1,
-    }));
-  };
-
-  const handleIncrease = (productId) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: (prevQuantities[productId] || 0) + 1,
-    }));
-  };
+const SellerProductList = ({ products }) => {
 
   return (
     <>
@@ -87,16 +59,14 @@ const ProductList = ({ products }) => {
           <ProductPrice>R${product.price.toFixed(2)}</ProductPrice>
 
           <QuantityContainer>
-            <QuantityButtonRemove onClick={() => handleDecrease(product.id)}>-</QuantityButtonRemove>
-            <QuantityText>{quantities[product.id] || 0}</QuantityText>
-            <QuantityButtonAdd onClick={() => handleIncrease(product.id)}>+</QuantityButtonAdd>
+            <QuantityText>Estoque: {product.stock}</QuantityText>
           </QuantityContainer>
 
-          <AddToCartButton>Add Cart</AddToCartButton>
+          <RemoveProductButton>Remove Product</RemoveProductButton>
         </ProductCard>
       ))}
     </>
   );
 };
 
-export default ProductList;
+export default SellerProductList;

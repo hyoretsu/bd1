@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Filters from './Filters';
-import ProductList from './ProductList';
+import SellerFilters from './SellerFilters';
+import SellerProductList from './SellerProductList';
+import SellerProductForm from './SellerRegisterProduct';
 
 const PageContainer = styled.div`
   display: flex;
@@ -47,7 +48,7 @@ const Title = styled.h3`
   padding: 10px;
 `
 
-const Products = () => {
+const SellerProducts = () => {
   const [categoryFilter, setCategoryFilter] = useState('');
   const [stockFilter, setStockFilter] = useState('');
   const [priceFilter, setPriceFilter] = useState('');
@@ -143,7 +144,7 @@ const Products = () => {
     <PageContainer>
       <ContentContainer>
         <FiltersContainer>
-          <Filters
+          <SellerFilters
             onCategoryChange={handleCategoryChange}
             onStockChange={handleStockChange}
             onPriceChange={handlePriceChange}
@@ -155,9 +156,10 @@ const Products = () => {
         <ProductsContainer>
           <Vendedor>
             <Title>Baratie</Title> {/* Novo contêiner para o título */}
+            <SellerProductForm />
           </Vendedor>
           <ProductListContainer>
-            <ProductList products={filteredProducts} />
+            <SellerProductList products={filteredProducts} />
           </ProductListContainer>
         </ProductsContainer>
       </ContentContainer>
@@ -165,4 +167,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default SellerProducts;
