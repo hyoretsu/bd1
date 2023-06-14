@@ -16,6 +16,7 @@ const Label = styled.label`
   font-size: 12px;
   align-self: flex-start;
   font-family: quicksand, Roboto, sans-serif;
+  color: 
 `;
 
 const Input = styled.input`
@@ -28,9 +29,8 @@ const Input = styled.input`
   transition: all 0.3s ease; // Suaviza a transição de estilos
   background: rgba(255, 255, 255, 0.8);
   // Estilo ao focar no campo de entrada
-  &:focus {
-    border-color: #02afa5; // Muda a cor da borda ao focar
-    box-shadow: 0 0 10px #02afa5; // Adiciona um brilho ao focar
+  &:focus { // Muda a cor da borda ao focar
+    box-shadow: 0 0 10px #07948d3d; // Adiciona um brilho ao focar
   }
 `;
 
