@@ -14,7 +14,7 @@ const Label = styled.label`
   font-weight: bold;
   font-size: 12px;
   align-self: flex-start;
-  font-family: Roboto, sans-serif;
+  font-family: quicksand, Roboto, sans-serif;
 `;
 
 const Input = styled.input`
@@ -42,7 +42,7 @@ const Button = styled.button`
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-  font-family: Roboto, sans-serif;
+  font-family: quicksand, Roboto, sans-serif;
 `;
 
 const SellerSignUpForm: React.FC = () => {

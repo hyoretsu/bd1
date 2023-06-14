@@ -90,7 +90,7 @@ const SignupSection = styled.div`
 `;
 
 const SingupTitle = styled.h2`
-  font-family: Roboto, sans-serif;
+  font-family: quicksand, Roboto, sans-serif;
   color: #059B90;
 `;
 

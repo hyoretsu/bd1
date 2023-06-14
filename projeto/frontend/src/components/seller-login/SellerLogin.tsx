@@ -25,7 +25,7 @@ const SubmitButton = styled.button`
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-  font-family: Roboto, sans-serif;
+  font-family: quicksand, Roboto, sans-serif;
 `;
 
 const SellerLogin: React.FC = () => {

@@ -41,7 +41,7 @@ const ModalButton = styled.button`
   padding: 5px 10px;
   cursor: pointer;
   transition: color 0.3s;
-  font-family: Roboto;
+  font-family: quicksand, Roboto;
 
   &:hover {
     color: #00423b;

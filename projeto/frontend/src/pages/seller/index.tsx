@@ -57,7 +57,7 @@ const SellerPageDiv = styled.div`
 const SellerTitle = styled.h2`
   color: rgba(0, 71, 66, 1);
   display: inline;
-  font-family: 'Segoe UI', quicksand, sans-serif;
+  font-family: quicksand, 'Segoe UI', sans-serif;
   font-size: 3rem;
   margin-bottom: 20px;
   margin-right: 10px;

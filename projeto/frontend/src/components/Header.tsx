@@ -5,6 +5,10 @@ import SearchBar from './SearchBar';
 import UserButton from './icons/UserButton';
 import CarrinhoButton from './icons/CarrinhoButton';
 
+import { useRouter } from 'next/router';
+
+import SellerHeader from './icons/Seller';
+
 const HeaderContainer = styled.header`
   z-index: 2;
   display: flex;
@@ -41,19 +45,29 @@ const ButtonsAlignDiv = styled.div`
   justify-content: space-between;
 `;
 
+const StyledSellerHeader = styled.img`
+`;
+
+
 const Header: React.FC = () => {
+  const router = useRouter();
+  const { pathname } = router;
+
+  const isSellerPage = pathname === '/seller' || pathname === '/seller-login' || pathname === '/seller-products' || pathname === '/seller-dashboard'; // Atualize com o caminho da página de vendedor
+
   return (
     <HeaderContainer>
       <ScaledContainer>
         <ButtonsAlignDiv>
-        <PedidoIcon />
-        <SearchBar />
-        <ButtonsContainer>
-          <UserButton />
-        </ButtonsContainer>
-        <ButtonsContainer>
-          <CarrinhoButton />
-        </ButtonsContainer>
+          <PedidoIcon />
+          {isSellerPage && <SellerHeader />}
+          <SearchBar />
+          <ButtonsContainer>
+            <UserButton />
+          </ButtonsContainer>
+          <ButtonsContainer>
+            <CarrinhoButton />
+          </ButtonsContainer>
         </ButtonsAlignDiv>
       </ScaledContainer>
     </HeaderContainer>

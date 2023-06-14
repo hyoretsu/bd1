@@ -2,29 +2,24 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const StoreDiv = styled.div`
-  perspective: 1500px;
-  background-color: rgba(255, 255, 255, 0.2);
+  margin-bottom: 5vh;
+  margin-right: 7vh;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.3);
   text-align: center;
-  max-height: 100%;
-  width: 50vh;
-  max-width: 100%;
-  border: 0.1px solid rgba(0, 0, 0, 0.2);
+  width: 40vh;
   border-radius: 30px;
   display: flex;
   justify-content: center;
   transition: transform 0.3s, box-shadow 0.3s;
   transform-style: preserve-3d;
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-    transform: rotateY(5deg) scale(1.05);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  }
   flex-direction: column;
-  padding: 8px;
+  padding: 3vh;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 `;
 
 const CardClient = styled.div`
-  font-family: 'Roboto', sans-serif;
+  font-family: quicksand, 'Roboto', sans-serif;
   border-bottom: 1px solid rgba(5, 155, 144, 0.7);
   align-items: left;
   width: 100%;
@@ -37,7 +32,7 @@ const CardClient = styled.div`
 `;
 
 const Detail = styled.div`
-  font-family: 'Roboto', sans-serif;
+  font-family: quicksand, 'Roboto', sans-serif;
   display: flex;
   justify-content: space-between;
 
@@ -53,7 +48,7 @@ const Detail = styled.div`
 `;
 
 const ProductDetails = styled.div`
-  font-family: 'Roboto', sans-serif;
+  font-family: quicksand, 'Roboto', sans-serif;
   padding: 8px;
   display: flex;
   justify-content: space-between;
@@ -64,6 +59,8 @@ const ProductDetails = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-left: 2vh;
+  margin-right: 2vh;
   margin-top: 16px;
 `;
 
@@ -73,20 +70,21 @@ const RefuseButton = styled.button`
   border: none;
   border-radius: 36px;
   cursor: pointer;
-  height: 20px;
-  width: 1000%;
+  height: 3vh;
+  width: 20vh;
   background-color: #E80B26;
   color: white;
 `;
 
 const AcceptButton = styled.button`
+  margin-left: 2.5vh;
   font-size: 16px;
   font-weight: bold;
   border: none;
   border-radius: 36px;
   cursor: pointer;
-  height: 20px;
-  width: 1000%;
+  height: 3vh;
+  width: 20vh;
   background-color: #2CB6A9;
   color: white;
 `;
@@ -116,24 +114,24 @@ const OrderCard = ({ products }) => {
   return (
     <StoreDiv>
       <CardClient>
-        <div>Pedido</div>
+        <div>Pedidos:</div>
       </CardClient>
       <ProductDetails>
         <Detail>
-          <div>Nome</div>
-          <div>Quantidade</div>
+          <div style={{fontWeight: 'bold', color: 'rgba(0, 71, 66, 1)'}}>Nome</div>
+          <div style={{fontWeight: 'bold', color: 'rgba(0, 71, 66, 1)'}}>Quantidade</div>
         </Detail>
         {products.map((product, index) => (
           <Detail key={index}>
-            <div>{product.productName}</div>
+            <div style={{fontWeight: '300'}}>{product.productName}</div>
             <div>{product.quantity}</div>
           </Detail>
         ))}
       </ProductDetails>
       <ProductDetails>
         <Detail>
-          <div>Valor Total</div>
-          <div>R${total.toFixed(2)}</div>
+          <div style={{fontWeight: 'bold', color: 'rgba(0, 71, 66, 1)'}}>Valor Total</div>
+          <div>R$ {total.toFixed(2)}</div>
         </Detail>
       </ProductDetails>
       <ButtonContainer>

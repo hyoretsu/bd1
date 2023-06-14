@@ -5,7 +5,7 @@ import PaymentComponent from './Pagamento';
 
 const TextStyle = createGlobalStyle`
   body {
-    font-family: 'Roboto', sans-serif;
+    font-family: quicksand, 'Roboto', sans-serif;
   }
   * {
     color: #004742;

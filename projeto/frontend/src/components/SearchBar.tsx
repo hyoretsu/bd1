@@ -11,7 +11,7 @@ const SearchBarContainer = styled.div`
   background-color: rgba(255, 255, 255, 0.0);
   padding: 2px;
   border-radius: 50px;
-  border: 1px solid rgba(0, 100, 0, 0.5);
+  border: 2px solid rgba(0, 71, 66, 0.5);
 `;
 
 const SearchInput = styled.input`

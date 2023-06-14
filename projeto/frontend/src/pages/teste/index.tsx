@@ -4,7 +4,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import MainContainer from '../../styles/MainContainer.styles';
 import BgGreen from '../../bgaux/bggreen.png';
-import OrderCard from '@/components/teste/OrderCard';
+import OrderCard from '@/components/ordercard/OrderCard';
 
 const Content = styled.div`
   margin-top: auto;
@@ -31,7 +31,7 @@ const CarouselDiv = styled.div`
   gap: 25px;
   width: 100%;
   padding: 3% 10%;
-  font-family: Roboto;
+  font-family: quicksand, Roboto;
   overflow-x: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -50,7 +50,7 @@ const VendorsTitleDiv = styled.div`
   font-weight: bold;
   font-size: 20px;
   display: flex;
-  font-family: Roboto;
+  font-family: quicksand, Roboto;
   width: 100%;
 `;
 

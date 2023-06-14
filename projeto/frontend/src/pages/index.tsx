@@ -59,7 +59,7 @@ const CadastroButton = styled.button`
   transition: box-shadow 0.3s, background-color 0.3s;
   color: rgba(255, 255, 255, 1);
   font-size: 14px; /* Diminui o tamanho do texto do botão */
-  font-family: Roboto, sans-serif;
+  font-family: quicksand, Roboto, sans-serif;
 
   &:hover {
     background-color: rgba(5, 155, 144, 1);
@@ -100,7 +100,7 @@ const VendorsTitleDiv = styled.div`
   font-weight: bold;
   font-size: 20px;
   display: flex;
-  font-family: Roboto;
+  font-family: quicksand, Roboto;
   width: 100%; 
 `;
 
@@ -122,7 +122,7 @@ const CarouselDiv = styled.div`
   gap: 25px;
   width: 100%;
   padding: 3% 10%; 
-  font-family: Roboto;
+  font-family: quicksand, Roboto;
   overflow-x: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -130,39 +130,6 @@ const CarouselDiv = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-`;
-
-
-const CarouselButton = styled.button`
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #FF7300;
-  border: none;
-  border-radius: 50%;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-
-  transition: background-color 0.3s;
-  &:hover {
-    background-color: #FF4500;
-  }
-`;
-
-const CarouselButtonPrev = styled(CarouselButton)`
-  left: 0;
-  transform: translateX(-50%) translateY(-50%);
-`
-const CarouselButtonNext = styled(CarouselButton)`
-  right: 0;
-  transform: translateX(50%) translateY(-50%);
 `;
 
 const StoreDiv = styled.div`
@@ -207,7 +174,7 @@ const CardName = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Roboto', sans-serif;
+  font-family: quicksand, 'Roboto', sans-serif;
   font-size: 16px;
   margin-top: 50%px; // adiciona espaço entre a imagem e o nome
 `;
@@ -262,12 +229,6 @@ const Home: React.FC = () => {
       .then(data => setStoreData(storeData => storeData.concat(data)));
   }, []);
 
-  const scrollCarousel = (direction) => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollLeft += direction === 'right' ? 300 : -300;
-    }
-  };
-
   return (
     <MainContainer>
       <Header />
@@ -288,10 +249,6 @@ const Home: React.FC = () => {
                       key={store.id}
                       image={store.image}
                       name={store.name}
-                      showButtonPrev={index === 0}
-                      showButtonNext={index === storeData.length - 1}
-                      onClickPrev={() => scrollCarousel('left')}
-                      onClickNext={() => scrollCarousel('right')}
                     />
                   ))}
               </CarouselDiv>
