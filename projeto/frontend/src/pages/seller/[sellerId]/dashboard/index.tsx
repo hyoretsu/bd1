@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import MainContainer from '../../styles/MainContainer.styles';
-import BgGreen from '../../bgaux/bggreen.png';
-import SVGIcon from '../../icons/confirme.svg'; 
-import TempImage from '../../assets/seller/baratie.png'; // Imagem temporária
-import OrderCard from '../../components/ordercard/OrderCard';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import MainContainer from '@/styles/MainContainer.styles';
+import BgGreen from '@/bgaux/bggreen.png';
+import SVGIcon from '@/icons/confirme.svg';
+import TempImage from '@/assets/seller/baratie.png'; // Imagem temporária
+import OrderCard from '@/components/ordercard/OrderCard';
 
-import Image1 from '../../assets/home/carrossel/1.png';
-import Image2 from '../../assets/home/carrossel/2.png';
-import Image3 from '../../assets/home/carrossel/3.png';
-import Image4 from '../../assets/home/carrossel/4.png';
-import Image5 from '../../assets/home/carrossel/5.png';
+import Image1 from '@/assets/home/carrossel/1.png';
+import Image2 from '@/assets/home/carrossel/2.png';
+import Image3 from '@/assets/home/carrossel/3.png';
+import Image4 from '@/assets/home/carrossel/4.png';
+import Image5 from '@/assets/home/carrossel/5.png';
 
 const Content = styled.div`
   z-index: 4;
@@ -113,13 +113,13 @@ const TextSellerHome = styled.div`
 const OrderTitle = styled.div`
   padding: 0px 0px 4vh 1vh;
   color: rgba(0, 0, 0, 0.7);
-  justify-content: flex-start; 
-  text-align: left; 
+  justify-content: flex-start;
+  text-align: left;
   font-weight: bold;
   font-size: 1.8rem;
   display: flex;
   font-family: quicksand, Roboto;
-  width: 100%; 
+  width: 100%;
 
   // Adicione as media queries para alterar as propriedades conforme a largura da tela.
   @media (max-width: 1024px) {
@@ -250,14 +250,14 @@ const DashboardBox = styled.div`
 
 const StoreCard = ({ image, name }): React.JSX.Element => {
     const [coords, setCoords] = React.useState({ x: 0, y: 0 });
-  
+
     const handleMouseMove = (e) => {
       const rect = e.target.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 4 - 1;
       const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
       setCoords({ x, y });
     };
-  
+
     return (
       <StoreDiv
         onMouseMove={handleMouseMove}
@@ -308,11 +308,11 @@ const staticStoreData = [
   background-color: ${props => props.current ? 'rgba(255, 115, 0, 1)' : 'rgba(0, 71, 66, 0.14)'};
 `;
 
-  
+
   const date = new Date();
   const currentMonth = date.getMonth() + 1;
   const previousMonths = months.slice(Math.max(currentMonth - 3, 0), currentMonth);
-  
+
   <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
     {previousMonths.map(month => (
       <MonthDiv key={month.id} current={month.id === currentMonth}>
@@ -320,7 +320,7 @@ const staticStoreData = [
       </MonthDiv>
     ))}
   </div>
-  
+
 
 const topProducts = [
   { id: 1, name: "Produto A", sales: 100, value: 5 },
@@ -512,7 +512,7 @@ const Seller: React.FC = () => {
             <LeftDiv>
               <div>
                 <SellerTitle>{sellerName}</SellerTitle>
-                <SVGIcon /> 
+                <SVGIcon />
               </div>
               <TextSellerHome>Acesse sua página e preencha os produtos ofertados por você.</TextSellerHome>
               <ButtonDiv>

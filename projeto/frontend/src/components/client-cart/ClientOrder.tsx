@@ -52,7 +52,10 @@ const CartValues = styled.div`
 const CartComponent: React.FC<CartComponentProps> = ({ cartItems }) => {
     const { products } = useCart();
 
-  const subTotal = cartItems.reduce((sum, item) => sum + item.price, 0);
+  const subTotal = cartItems.reduce((sum, item) => {
+    console.log(item);
+    return sum + item.price * products[item.productId].amount
+}, 0);
   const discount = subTotal * 0.1;
   const finalTotal = subTotal - discount;
 
@@ -80,7 +83,7 @@ const CartComponent: React.FC<CartComponentProps> = ({ cartItems }) => {
           <Total>R${subTotal.toFixed(2)}</Total>
         </CartItemContainer>
         <CartItemContainer>
-          <ProductName>Desconto</ProductName>
+          <ProductName>Desconto (não temos login, mas é automático no back)</ProductName>
           <Total>R${discount.toFixed(2)}</Total>
         </CartItemContainer>
         <CartItemContainer>

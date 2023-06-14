@@ -1,4 +1,5 @@
 import api from '@/services/api';
+import { useRouter } from 'next/router';
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import styled from 'styled-components';
 
@@ -55,6 +56,8 @@ const Button = styled.button`
 `;
 
 const PaymentComponent = () => {
+    const {push} = useRouter();
+
   const [fullName, setFullName] = useState<string>('');
   const [cardNumber, setCardNumber] = useState<string>('');
   const [expirationDate, setExpirationDate] = useState<string>('');
@@ -71,6 +74,7 @@ const PaymentComponent = () => {
   };
 
   const handleGenerateClick = async () => {
+    push('/')
     // await api.post('/orders');
   };
 

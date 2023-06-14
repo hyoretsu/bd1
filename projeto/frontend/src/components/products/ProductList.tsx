@@ -2,19 +2,6 @@ import { useCart } from '@/context/cart';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-  stock: number;
-<<<<<<< HEAD
-=======
-  imageUrl: string;
->>>>>>> 80eaca2 (Projeto: integração - Produtos)
-  city: string;
-}
-
 const ProductCard = styled.div`
   width: 9vw;
   background-color: white;
@@ -74,11 +61,7 @@ const AddToCartButton = styled.button`
   cursor: pointer;
 `;
 
-interface ProductListProps {
-  products: Product[];
-}
-
-const ProductList: React.FC<ProductListProps> = ({ productsList }) => {
+const ProductList: React.FC = ({ productsList }) => {
     const {decreaseProduct,increaseProduct,products} = useCart();
 
   return (
