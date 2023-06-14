@@ -57,7 +57,7 @@ const InnerDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10vh;
+  margin-top: 2.3rem;
 `;
 
 const LeftDiv = styled.div`
@@ -111,7 +111,7 @@ const TextSellerHome = styled.div`
 
 
 const OrderTitle = styled.div`
-  padding: 0px 0px 4vh 1vh; // reduzido o padding superior
+  padding: 0px 0px 4vh 1vh;
   color: rgba(0, 0, 0, 0.7);
   justify-content: flex-start; 
   text-align: left; 
@@ -120,7 +120,22 @@ const OrderTitle = styled.div`
   display: flex;
   font-family: quicksand, Roboto;
   width: 100%; 
-  height: auto;
+
+  // Adicione as media queries para alterar as propriedades conforme a largura da tela.
+  @media (max-width: 1024px) {
+    font-size: 1.6rem;
+    padding: 0px 0px 3vh 1vh;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+    padding: 0px 0px 2vh 1vh;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+    padding: 0px 0px 1vh 1vh;
+  }
 `;
 
 const VendorInfoDiv = styled.div`
@@ -134,11 +149,11 @@ const VendorInfoDiv = styled.div`
 const CarouselDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; // Centraliza os vendedores
-  padding: 0% 5vw; 
-  font-family: quicksand, Roboto;
+  padding: 0% 5vw;
+  font-family: quicksand,Roboto;
   overflow-x: scroll;
-  scrollbar-width: none;
+  scrollbar-width: auto;
+  justify-content: space-between;
   -ms-overflow-style: none;
 
   &::-webkit-scrollbar {
@@ -202,8 +217,11 @@ const DashboardRelatorio = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-width: 250px; // ajuste de acordo com a largura mínima desejada 
+  max-width: 95%; // ajuste de acordo com a largura máxima desejada
+  width: 15vw;
   margin-left: 1vh;
-  border-radius: 20px; //ajuste de acordo com o quão arredondado você quer as bordas
+  border-radius: 2rem; //ajuste de acordo com o quão arredondado você quer as bordas
   padding: 20px; //ajuste de acordo com o espaçamento interno desejado
   background-color: rgba(255, 255, 255, 0.2); //ajuste de acordo com a cor de fundo desejada
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); //adiciona uma sombra suave
@@ -390,7 +408,7 @@ const Dashboard = () => {
 
   return (
     <DashboardRelatorio>
-      <DashboardItemDiv style={{background: 'rgba(255, 255, 255, 0.0)', fontSize: '12px', width: '25vh', display: 'flow-root'}}>
+      <DashboardItemDiv style={{background: 'rgba(255, 255, 255, 0.0)', fontSize: '12px', width: '25vh', display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
         <DashboardItemTitle style={{color: 'rgba(0, 71, 66, 1)'}}>Relatório | Vendedor</DashboardItemTitle>
       </DashboardItemDiv>
       <DashboardItemDiv>
