@@ -201,34 +201,51 @@ const StoreDiv = styled.div`
 `;
 
 const DashboardDiv = styled.div`
-  border-radius: 2rem; 
-  padding: 2.19rem; 
-  background-color: rgba(255, 255, 255, 0.2); 
-  min-width: 250px; // ajuste de acordo com a largura mínima desejada 
-  max-width: 95%; // ajuste de acordo com a largura máxima desejada
-  width: 30vw; // ajuste de acordo com a largura desejada 
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
-  height: 45vh;
-  margin: auto; // centraliza o div
+    border-radius: 2rem;
+    padding: 2.19rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    min-width: 250px;
+    max-width: 95%;
+    width: 30vw;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    height: 45vh;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    align-content: flex-start;
 `;
-
 
 const DashboardRelatorio = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 250px; // ajuste de acordo com a largura mínima desejada 
-  max-width: 95%; // ajuste de acordo com a largura máxima desejada
-  width: 15vw;
-  margin-left: 1vh;
-  border-radius: 2rem; //ajuste de acordo com o quão arredondado você quer as bordas
-  padding: 20px; //ajuste de acordo com o espaçamento interno desejado
-  background-color: rgba(255, 255, 255, 0.2); //ajuste de acordo com a cor de fundo desejada
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); //adiciona uma sombra suave
+      justify-content: space-evenly;
+      min-width: 250px;
+      max-width: 95%;
+      max-height: 95%;
+      min-height: 250;
+      width: 15vw;
+      margin-left: 1vh;
+      border-radius: 2rem;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      flex-wrap: wrap;
+      align-content: stretch;
+      /* flex-direction: column; */
+      align-items: center;
 `;
 
 const DashboardBox = styled.div`
   display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: stretch;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const StoreCard = ({ image, name }): React.JSX.Element => {
@@ -319,7 +336,7 @@ const profitShares = [
 ];
 
 const ProductCard = styled.div`
-  width: 16vh;
+  width: 15vh;
   height: 25vh;
   margin-left: 1.3vh;
   border-radius: 15px;
@@ -327,8 +344,25 @@ const ProductCard = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-`;
 
+  @media (max-width: 1024px) {
+    width: 18vh;
+    height: 27vh;
+    margin-left: 1vh;
+  }
+
+  @media (max-width: 768px) {
+    width: 20vh;
+    height: 29vh;
+    margin-left: 0.7vh;
+  }
+
+  @media (max-width: 480px) {
+    width: 22vh;
+    height: 31vh;
+    margin-left: 0.4vh;
+  }
+`;
 const ProductHeader = styled.div`
   flex-grow: 1; /* Adicionado */
   font-weight: bold;
@@ -409,7 +443,7 @@ const Dashboard = () => {
   return (
     <DashboardRelatorio>
       <DashboardItemDiv style={{background: 'rgba(255, 255, 255, 0.0)', fontSize: '12px', width: '25vh', display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-        <DashboardItemTitle style={{color: 'rgba(0, 71, 66, 1)'}}>Relatório | Vendedor</DashboardItemTitle>
+        <DashboardItemTitle style={{color: 'rgba(0, 71, 66, 1)'}}>Relatório</DashboardItemTitle>
       </DashboardItemDiv>
       <DashboardItemDiv>
         <DashboardItemTitle style={{color: 'rgba(0, 71, 66, 1)'}} >Lucro Mensal</DashboardItemTitle>
