@@ -7,12 +7,15 @@ interface Product {
   category: string;
   price: number;
   stock: number;
+<<<<<<< HEAD
+=======
+  imageUrl: string;
+>>>>>>> 80eaca2 (Projeto: integração - Produtos)
   city: string;
 }
 
 const ProductCard = styled.div`
-  width: 25%;
-  margin-bottom: 20px;
+  width: 9vw;
   background-color: white;
   margin: 20px;
   border-radius: 16px;
@@ -95,6 +98,7 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
     <>
       {products.map((product) => (
         <ProductCard key={product.id}>
+          {product.imageUrl&&<ProductImage src={product.imageUrl} alt={product.name} />}
           <ProductName>{product.name}</ProductName>
           <ProductPrice>R${product.price.toFixed(2)}</ProductPrice>
 

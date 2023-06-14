@@ -176,7 +176,7 @@ const CardName = styled.div`
 `;
 
 
-const StoreCard = ({ image, name }): React.JSX.Element => {
+const StoreCard = ({ image, name,onClick }): React.JSX.Element => {
   const [coords, setCoords] = React.useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e) => {
@@ -188,6 +188,7 @@ const StoreCard = ({ image, name }): React.JSX.Element => {
 
   return (
     <StoreDiv
+      onClick={onClick}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setCoords({ x: 0, y: 0 })}
       x={coords.x}
@@ -235,7 +236,7 @@ const Home: React.FC = () => {
                       key={store.id}
                       image={store.logoUrl}
                       name={store.name}
-                      onClick={()=> push('/seller')}
+                      onClick={()=> push(`/products/${store.id}`)}
                     />
                   ))}
               </CarouselDiv>

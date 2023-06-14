@@ -14,6 +14,7 @@ import CreateItem from "./services/CreateItem.service";
 import CreateSeller from "./services/CreateSeller.service";
 import DeleteSeller from "./services/DeleteSeller.service";
 import EditSeller from "./services/EditSeller.service";
+import ListItems from "./services/ListItems.service";
 import ListSellers from "./services/ListSellers.service";
 
 @Module({
@@ -36,7 +37,7 @@ import ListSellers from "./services/ListSellers.service";
 			provide: HashProvider,
 			useClass: hashProviderImplementations["bcrypt"],
 		},
-		...[CreateItem, CreateSeller, DeleteSeller, EditSeller, ListSellers],
+		...[CreateItem, CreateSeller, DeleteSeller, EditSeller, ListItems, ListSellers],
 	],
 })
 export default class SellersModule {}

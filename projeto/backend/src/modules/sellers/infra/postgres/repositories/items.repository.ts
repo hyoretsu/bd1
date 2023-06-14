@@ -15,8 +15,8 @@ export default class PostgresItemsRepository implements ItemsRepository {
 		await this.pg.query(`
                 CREATE TABLE IF NOT EXISTS "Item" (
                     "id" VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
-                    "productId" VARCHAR(36),
-                    "sellerId" VARCHAR(36),
+                    "productId" VARCHAR(36) NOT NULL,
+                    "sellerId" VARCHAR(36) NOT NULL,
                     "amount" INTEGER NOT NULL CHECK(amount >= 0),
                     "price" FLOAT NOT NULL CHECK(price >= 0),
                     "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -46,6 +46,23 @@ export default class PostgresItemsRepository implements ItemsRepository {
         `);
 
 		return item;
+	}
+
+	public async findAllBySeller(id: string): Promise<Item[]> {
+		const { rows: items } = await this.pg.query<Item>(`
+            SELECT
+                *
+            FROM
+                "Item" i
+            JOIN
+                "Product" p
+            ON
+                i."productId" = p.id
+            WHERE
+                i."sellerId" = '${id}'
+        `);
+
+		return items;
 	}
 
 	public async findById(id: string): Promise<Item | null> {

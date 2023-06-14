@@ -7,6 +7,7 @@ const PageContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  flex:1;
 `;
 
 const ContentContainer = styled.div`
@@ -20,7 +21,6 @@ const ContentContainer = styled.div`
 `;
 
 const FiltersContainer = styled.div`
-  width: 200px;
   padding: 10px;
 `;
 
@@ -33,7 +33,7 @@ const ProductListContainer = styled.div`
 const ProductsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc(100% - 220px);
+  flex:1;
 `;
 
 const Vendedor = styled.div`
@@ -66,6 +66,7 @@ const Products: React.FC<ProductsProps> = ({ data }) => {
   const [priceFilter, setPriceFilter] = useState<string>('');
   const [nameFilter, setNameFilter] = useState<string>('');
   const [cityFilter, setCityFilter] = useState<string>('');
+  console.log(data)
 
   const handleCategoryChange = (value: string) => {
     setCategoryFilter(value);
@@ -74,7 +75,7 @@ const Products: React.FC<ProductsProps> = ({ data }) => {
   const handleStockChange = (value: string) => {
     setStockFilter(value);
   };
-  
+
 
   const handlePriceChange = (value: string) => {
     setPriceFilter(value);

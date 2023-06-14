@@ -89,7 +89,7 @@ const Filters: React.FC<FiltersProps> = ({
   const handleStockChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setStockFilter(value);
-  };  
+  };
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -133,7 +133,7 @@ const Filters: React.FC<FiltersProps> = ({
       <FilterLabel>
         Estoque
         <br />
-        <FilterInput type="number" value={stockFilter} onChange={handleStockChange} />
+        <FilterInput placeholder="Quebrado" type="number" value={stockFilter} onChange={handleStockChange} />
       </FilterLabel>
       <FilterLabel>
         Preço Máximo
@@ -148,7 +148,7 @@ const Filters: React.FC<FiltersProps> = ({
       <FilterLabel>
         Cidade de Origem
         <br />
-        <FilterInput type="text" value={cityFilter} onChange={handleCityChange} />
+        <FilterInput placeholder="Quebrado só no front" type="text" value={cityFilter} onChange={handleCityChange} />
       </FilterLabel>
       <FilterButton onClick={handleFilter}>Filter</FilterButton>
     </FiltersContainer>

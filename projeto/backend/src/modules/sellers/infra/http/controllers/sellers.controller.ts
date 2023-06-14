@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
 
 import CreateItemDTO from "@modules/sellers/dtos/CreateItem.dto";
 import CreateSellerDTO from "@modules/sellers/dtos/CreateSeller.dto";
@@ -10,6 +10,7 @@ import CreateItem from "@modules/sellers/services/CreateItem.service";
 import CreateSeller from "@modules/sellers/services/CreateSeller.service";
 import DeleteSeller from "@modules/sellers/services/DeleteSeller.service";
 import EditSeller from "@modules/sellers/services/EditSeller.service";
+import ListItems from "@modules/sellers/services/ListItems.service";
 import ListSellers from "@modules/sellers/services/ListSellers.service";
 
 @Controller("sellers")
@@ -19,6 +20,7 @@ export default class SellersController {
 		private createSeller: CreateSeller,
 		private deleteSeller: DeleteSeller,
 		private editSeller: EditSeller,
+		private listItems: ListItems,
 		private listSellers: ListSellers,
 	) {}
 
@@ -46,6 +48,13 @@ export default class SellersController {
 		const seller = await this.createSeller.execute(body);
 
 		return seller;
+	}
+
+	@Get("items/:id")
+	async getSellersItems(@Param("id") id: string): Promise<Item[]> {
+		const items = await this.listItems.execute(id);
+
+		return items;
 	}
 
 	@Post("items")

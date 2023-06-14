@@ -53,7 +53,7 @@ const Header: React.FC = () => {
   const router = useRouter();
   const { pathname } = router;
 
-  const isSellerPage = pathname === '/seller' || pathname === '/seller-login' || pathname === '/seller-products' || pathname === '/seller-dashboard'; // Atualize com o caminho da página de vendedor
+  const isSellerPage = pathname.includes("seller");
 
   return (
     <HeaderContainer>
