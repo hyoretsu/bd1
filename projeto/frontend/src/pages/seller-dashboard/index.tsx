@@ -16,9 +16,7 @@ import Image5 from '../../assets/home/carrossel/5.png';
 
 const Content = styled.div`
   z-index: 4;
-  margin-top: auto;
-  margin-bottom: 20px;
-  min-height: 735px;
+  min-height: 80vh;
   width: 100%;
   position: relative;
   display: flex;
@@ -26,15 +24,14 @@ const Content = styled.div`
   align-items: center;
   justify-content: flex-start;
   background-image: url(${BgGreen.src});
-  background-size: 100% 100%;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   backdrop-filter: blur(1px);
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
-  flex-grow: 1; // Permite que o Content cresça para preencher todo o espaço disponível
+  flex-grow: 1;
 `;
-
 
 const TopHomeDiv = styled.div`
   z-index: 3;
@@ -53,12 +50,6 @@ const SellerTitle = styled.h2`
   font-size: 3rem;
   margin-bottom: 20px;
   margin-right: 10px;
-`;
-
-const SellerDescription = styled.p`
-  font-size: 16px;
-  line-height: 1.5;
-  text-align: center;
 `;
 
 const InnerDiv = styled.div`
@@ -81,6 +72,7 @@ const RightDiv = styled.div`
 `;
 
 const ButtonDiv = styled.div`
+  padding: 1rem;
   margin-top: 10px;
   display: flex;
   gap: 2vh;
@@ -136,15 +128,14 @@ const VendorInfoDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%; /* Utiliza a largura total disponível */
+  width: 100%;
 `;
-
 
 const CarouselDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center; // Centraliza os vendedores
-  padding: 0% 10%; 
+  padding: 0% 5vw; 
   font-family: quicksand, Roboto;
   overflow-x: scroll;
   scrollbar-width: none;
@@ -195,12 +186,17 @@ const StoreDiv = styled.div`
 `;
 
 const DashboardDiv = styled.div`
-  border-radius: 20px; //ajuste de acordo com o quão arredondado você quer as bordas
-  padding: 20px; //ajuste de acordo com o espaçamento interno desejado
-  background-color: rgba(255, 255, 255, 0.2); //ajuste de acordo com a cor de fundo desejada
-  width: 60vh; //ajuste de acordo com a largura desejada //ajuste de acordo com a altura desejada
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); //adiciona uma sombra suave
+  border-radius: 2rem; 
+  padding: 2.19rem; 
+  background-color: rgba(255, 255, 255, 0.2); 
+  min-width: 250px; // ajuste de acordo com a largura mínima desejada 
+  max-width: 95%; // ajuste de acordo com a largura máxima desejada
+  width: 30vw; // ajuste de acordo com a largura desejada 
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+  height: 45vh;
+  margin: auto; // centraliza o div
 `;
+
 
 const DashboardRelatorio = styled.div`
   display: flex;
@@ -282,7 +278,7 @@ const staticStoreData = [
   const currentMonth = date.getMonth() + 1;
   const previousMonths = months.slice(Math.max(currentMonth - 3, 0), currentMonth);
   
-  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
+  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
     {previousMonths.map(month => (
       <MonthDiv key={month.id} current={month.id === currentMonth}>
         {month.name}
