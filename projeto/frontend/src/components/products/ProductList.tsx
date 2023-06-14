@@ -7,7 +7,6 @@ interface Product {
   category: string;
   price: number;
   stock: number;
-  image: string;
   city: string;
 }
 
@@ -96,7 +95,6 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
     <>
       {products.map((product) => (
         <ProductCard key={product.id}>
-          <ProductImage src={product.image} alt={product.name} />
           <ProductName>{product.name}</ProductName>
           <ProductPrice>R${product.price.toFixed(2)}</ProductPrice>
 

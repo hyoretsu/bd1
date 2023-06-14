@@ -53,7 +53,6 @@ interface Product {
   category: string;
   price: number;
   stock: number;
-  image: string;
   city: string;
 }
 

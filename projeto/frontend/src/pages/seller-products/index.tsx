@@ -33,7 +33,6 @@ const SellerProductsPage: React.FC = () => {
       category: 'Category A',
       price: 10.99,
       stock: 5,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
       city: 'João Pessoa',
     },
     {
@@ -42,7 +41,6 @@ const SellerProductsPage: React.FC = () => {
       category: 'Category B',
       price: 19.99,
       stock: 10,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
       city: 'Mari',
     },
     {
@@ -51,7 +49,6 @@ const SellerProductsPage: React.FC = () => {
       category: 'Category A',
       price: 15.99,
       stock: 8,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
       city: 'São Paulo',
     },
     {
@@ -60,7 +57,6 @@ const SellerProductsPage: React.FC = () => {
       category: 'Category C',
       price: 24.99,
       stock: 2,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
       city: 'Rio de Janeiro',
     },
     {
@@ -69,7 +65,6 @@ const SellerProductsPage: React.FC = () => {
       category: 'Category B',
       price: 9.99,
       stock: 12,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
       city: 'Salvador',
     },
     {
@@ -78,7 +73,6 @@ const SellerProductsPage: React.FC = () => {
       category: 'Category A',
       price: 7.99,
       stock: 3,
-      image: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
       city: 'Recife',
     },
     // Add more products as needed
