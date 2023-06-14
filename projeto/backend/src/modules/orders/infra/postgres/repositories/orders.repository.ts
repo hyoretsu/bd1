@@ -54,20 +54,6 @@ export default class PostgresOrdersRepository implements OrdersRepository {
             );
         `);
 
-		// CREATE OR REPLACE FUNCTION getReport(seller_id VARCHAR(36)) RETURNS TABLE AS $$
-		//         SELECT
-		//             COUNT(*) AS "totalOrders",
-		//             SUM(i."price") AS "salesResult"
-		//         FROM
-		//             "Order" o,
-		//             "Item" i
-		//         WHERE
-		//             o."sellerId" = seller_id
-		//         GROUP BY
-		//             o."createdAt", EXTRACT(MONTH FROM o."createdAt")
-		//         ORDER BY
-		//             o."createdAt" DESC
-		//     $$ LANGUAGE SQL;
 		await this.pg.query(`
             CREATE OR REPLACE FUNCTION get_report(seller_id VARCHAR(36)) RETURNS TABLE (
                 "totalOrders" INTEGER,
@@ -82,7 +68,7 @@ export default class PostgresOrdersRepository implements OrdersRepository {
                 "Order" o,
                 "OrderItem" oi
             WHERE
-                o."sellerId" = '94008f44-8784-4662-8073-046d41f17332'
+                o."sellerId" = seller_id
             GROUP BY
                 DATE_TRUNC('month', o."createdAt")
             ORDER BY
@@ -174,10 +160,8 @@ export default class PostgresOrdersRepository implements OrdersRepository {
                 *
             FROM
                 "Order" o
-            WHERE
-                o.id = '${id}'
             JOIN "OrderItem" oi ON oi."orderId" = o.id
-            JOIN "OrderPayment" op ON op.orderId = o.id
+            JOIN "OrderPayment" op ON op."orderId" = o.id
         `);
 
 		return orders;
