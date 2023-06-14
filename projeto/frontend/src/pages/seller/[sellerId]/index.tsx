@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import MainContainer from '../../styles/MainContainer.styles';
-import BgGreen from '../../bgaux/bggreen.png';
-import SVGIcon from '../../icons/confirme.svg'; 
-import TempImage from '../../assets/seller/baratie.png'; // Imagem temporária
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import MainContainer from '@/styles/MainContainer.styles';
+import BgGreen from '@/bgaux/bggreen.png';
+import SVGIcon from '@/icons/confirme.svg';
+import { useRouter } from 'next/router';
+import api from '@/services/api';
 
 const Content = styled.div`
   z-index: 1;
@@ -130,8 +131,18 @@ const RestaurantImage = styled.img`
 `;
 
 const Seller: React.FC = () => {
-  const [sellerName, setSellerName] = useState('Baratie');
-  const [restaurantImagePath, setRestaurantImagePath] = useState(TempImage.src);
+    const {query:{sellerId}} = useRouter();
+  const [info, setInfo] = useState({});
+
+  useEffect(()=>{
+      const execute = async () => {
+          const { data } = await api.get(`/sellers`);
+
+          setInfo(data.find(seller => seller.id === sellerId));
+      }
+
+      execute();
+  },[sellerId])
 
   return (
     <MainContainer>
@@ -141,8 +152,8 @@ const Seller: React.FC = () => {
           <InnerDiv>
             <LeftDiv>
               <div>
-                <SellerTitle>{sellerName}</SellerTitle>
-                <SVGIcon /> 
+                <SellerTitle>{info?.name}</SellerTitle>
+                <SVGIcon />
               </div>
               <TextSellerHome>Acesse sua página e preencha os produtos ofertados por você.</TextSellerHome>
               <ButtonDiv>
@@ -151,7 +162,7 @@ const Seller: React.FC = () => {
               </ButtonDiv>
             </LeftDiv>
             <RightDiv>
-              <RestaurantImage src={restaurantImagePath} alt='Imagem do Restaurante' />
+              <RestaurantImage src={info?.logoUrl} alt='Imagem do Restaurante' />
             </RightDiv>
           </InnerDiv>
         </TopHomeDiv>

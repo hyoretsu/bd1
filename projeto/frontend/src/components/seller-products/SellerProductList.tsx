@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ProductCard = styled.div`
-  width: 25%;
   margin-bottom: 20px;
   background-color: white;
   margin: 20px;
@@ -48,20 +47,7 @@ const RemoveProductButton = styled.button`
   cursor: pointer;
 `;
 
-type Product = {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-  stock: number;
-  city: string;
-};
-
-type SellerProductListProps = {
-  products: Product[];
-};
-
-const SellerProductList: React.FC<SellerProductListProps> = ({ products }) => {
+const SellerProductList: React.FC = ({ products }) => {
   return (
     <>
       {products.map((product) => (
@@ -70,10 +56,10 @@ const SellerProductList: React.FC<SellerProductListProps> = ({ products }) => {
           <ProductPrice>R${product.price.toFixed(2)}</ProductPrice>
 
           <QuantityContainer>
-            <QuantityText>Estoque: {product.stock}</QuantityText>
+            <QuantityText>Estoque: {product.amount}</QuantityText>
           </QuantityContainer>
 
-          <RemoveProductButton>Remove Product</RemoveProductButton>
+          <RemoveProductButton>Remover</RemoveProductButton>
         </ProductCard>
       ))}
     </>

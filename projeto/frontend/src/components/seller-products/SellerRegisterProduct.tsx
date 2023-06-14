@@ -155,7 +155,7 @@ const SellerProductForm = () => {
               required
             />
           </FormGroup>
-          <Button type="submit">Cadastrar</Button>
+          <Button type="submit">Cadastrar (são umas 3 camadas de requisições no estado atual)</Button>
         </form>
       )}
     </FormContainer>

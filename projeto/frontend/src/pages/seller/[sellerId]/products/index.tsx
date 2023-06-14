@@ -38,7 +38,7 @@ const SellerProductsPage: React.FC = () => {
         }
 
         execute();
-    },[])
+    },[sellerId])
 
   return (
     <MainContainer>

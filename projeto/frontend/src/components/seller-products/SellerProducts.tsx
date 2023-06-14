@@ -34,7 +34,7 @@ const ProductListContainer = styled.div`
 const ProductsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc(100% - 220px);
+  width: 50vw;
 `;
 
 const Vendedor = styled.div`
@@ -75,7 +75,7 @@ const SellerProducts: React.FC<ProductsProps> = ({ data }) => {
   const handleStockChange = (value: string) => {
     setStockFilter(value);
   };
-  
+
 
   const handlePriceChange = (value: string) => {
     setPriceFilter(value);
