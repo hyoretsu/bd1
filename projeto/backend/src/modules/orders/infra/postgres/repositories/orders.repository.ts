@@ -3,10 +3,12 @@ import { Pool } from "pg";
 
 import CreateOrderDTO from "@modules/orders/dtos/CreateOrder.dto";
 import CreateOrderPaymentDTO from "@modules/orders/dtos/CreateOrderPayment.dto";
+import GenerateReportDTO from "@modules/orders/dtos/GenerateReport.dto";
 import Order from "@modules/orders/entities/Order";
 import OrderItem from "@modules/orders/entities/OrderItem";
 import OrderPayment from "@modules/orders/entities/OrderPayment";
 import OrdersRepository, { CreateOrderItemPayload } from "@modules/orders/repositories/orders.repository";
+import { OrdersReport } from "@modules/orders/services/GenerateReport.service";
 
 export default class PostgresOrdersRepository implements OrdersRepository {
 	constructor(@Inject("PG_CONNECTION") private pg: Pool) {
@@ -17,8 +19,8 @@ export default class PostgresOrdersRepository implements OrdersRepository {
 		await this.pg.query(`
             CREATE TABLE IF NOT EXISTS "Order" (
                 "id" VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
-                "clientId" VARCHAR(36) NOT NULL;
-                "sellerId" VARCHAR(36) NOT NULL;
+                "clientId" VARCHAR(36) NOT NULL,
+                "sellerId" VARCHAR(36) NOT NULL,
                 "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
                 CONSTRAINT "Order_clientId_fkey" FOREIGN KEY("clientId") REFERENCES "Client"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -31,6 +33,7 @@ export default class PostgresOrdersRepository implements OrdersRepository {
                 "orderId" VARCHAR(36) NOT NULL,
                 "itemId" VARCHAR(36) NOT NULL,
                 "amount" INTEGER NOT NULL CHECK(amount > 0),
+                "totalPrice" FLOAT NOT NULL CHECK(amount > 0) DEFAULT 0,
                 "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
                 PRIMARY KEY("orderId", "itemId"),
@@ -50,6 +53,42 @@ export default class PostgresOrdersRepository implements OrdersRepository {
                 CONSTRAINT "OrderPayment_orderId_fkey" FOREIGN KEY("orderId") REFERENCES "Order"("id") ON DELETE RESTRICT ON UPDATE CASCADE
             );
         `);
+
+		// CREATE OR REPLACE FUNCTION getReport(seller_id VARCHAR(36)) RETURNS TABLE AS $$
+		//         SELECT
+		//             COUNT(*) AS "totalOrders",
+		//             SUM(i."price") AS "salesResult"
+		//         FROM
+		//             "Order" o,
+		//             "Item" i
+		//         WHERE
+		//             o."sellerId" = seller_id
+		//         GROUP BY
+		//             o."createdAt", EXTRACT(MONTH FROM o."createdAt")
+		//         ORDER BY
+		//             o."createdAt" DESC
+		//     $$ LANGUAGE SQL;
+		await this.pg.query(`
+            CREATE OR REPLACE FUNCTION get_report(seller_id VARCHAR(36)) RETURNS TABLE (
+                "totalOrders" INTEGER,
+                "salesResult" FLOAT,
+                "month" TIMESTAMP
+            ) AS $$
+            SELECT
+                COUNT(*) AS "totalOrders",
+                SUM(oi."totalPrice") AS "salesResult",
+                DATE_TRUNC('month', o."createdAt") AS "month"
+            FROM
+                "Order" o,
+                "OrderItem" oi
+            WHERE
+                o."sellerId" = '94008f44-8784-4662-8073-046d41f17332'
+            GROUP BY
+                DATE_TRUNC('month', o."createdAt")
+            ORDER BY
+                DATE_TRUNC('month', o."createdAt") DESC
+            $$ LANGUAGE SQL;
+		`);
 	}
 
 	public async create(data: Omit<CreateOrderDTO, "items" | "paymentMethod">): Promise<Order> {
@@ -115,6 +154,20 @@ export default class PostgresOrdersRepository implements OrdersRepository {
 		return orderPayment;
 	}
 
+	public async delete(id: string): Promise<void> {
+		await this.pg.query(`DELETE FROM "OrderPayment" WHERE "orderId" = '${id}'`);
+		await this.pg.query(`DELETE FROM "OrderItem" WHERE "orderId" = '${id}'`);
+		await this.pg.query(`DELETE FROM "Order" WHERE id = '${id}'`);
+	}
+
+	public async findById(id: string): Promise<Order | null> {
+		const {
+			rows: [order],
+		} = await this.pg.query<Order>(`SELECT * FROM "Order" WHERE id = '${id}'`);
+
+		return order;
+	}
+
 	public async findOrdersBySeller(id: string): Promise<Order[]> {
 		const { rows: orders } = await this.pg.query<Order>(`
             SELECT
@@ -128,5 +181,13 @@ export default class PostgresOrdersRepository implements OrdersRepository {
         `);
 
 		return orders;
+	}
+
+	public async generateReportData(sellerId: string): Promise<OrdersReport[]> {
+		const { rows: reportData } = await this.pg.query<OrdersReport>(
+			`SELECT * FROM get_report('${sellerId}')`,
+		);
+
+		return reportData;
 	}
 }

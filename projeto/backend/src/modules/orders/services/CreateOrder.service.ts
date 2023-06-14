@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 
 import ClientsRepository from "@modules/clients/repositories/clients.repository";
+import Item from "@modules/sellers/entities/Item";
 import ItemsRepository from "@modules/sellers/repositories/items.repository";
 import SellersRepository from "@modules/sellers/repositories/sellers.repository";
 
@@ -51,6 +52,7 @@ export default class CreateOrder {
 		});
 
 		const order = await this.ordersRepository.create({ clientId, sellerId });
+		order.items = [];
 
 		let clientHasDiscount = false;
 		if (client.soccerTeam === "Flamengo" || client.onePiece === true || client.birthCity === "Sousa") {
@@ -58,8 +60,16 @@ export default class CreateOrder {
 		}
 
 		for (const item of items) {
+			// Update amount purchased from stock
+			const sellerItem = (await this.itemsRepository.findById(item.itemId)) as Item;
+			await this.itemsRepository.update({
+				itemId: sellerItem.id,
+				amount: sellerItem.amount - item.amount,
+			});
+
 			const orderItem = await this.ordersRepository.createItem({
-				amount: item.amount * (Number(clientHasDiscount) * 0.9),
+				amount: item.amount,
+				totalPrice: sellerItem.price * (Number(clientHasDiscount) * 0.9) * item.amount,
 				itemId: item.itemId,
 				orderId: order.id,
 			});

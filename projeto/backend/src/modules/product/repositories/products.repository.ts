@@ -1,7 +1,6 @@
-import Product from "../entities/Product";
 import CreateProductDTO from "../dtos/CreateProduct";
 import UpdateProductDTO from "../dtos/UpdateProduct";
-
+import Product from "../entities/Product";
 
 export type ReportData = {
 	originCityCount: Record<"cityOrigin" | "count", string>[];
@@ -17,7 +16,7 @@ export default abstract class ProductRepository {
 	abstract findByName(name: string): Promise<Product | null>;
 	abstract findByNameAll(name: string): Promise<Product[]>;
 	abstract findByCategory(category: string): Promise<Product[]>;
-    abstract findByCityOrigin(cityOrigin: string): Promise<Product[]>;
+	abstract findByCityOrigin(cityOrigin: string): Promise<Product[]>;
 	abstract generateReportData(): Promise<ReportData>;
 	abstract update(data: UpdateProductDTO): Promise<Product>;
 }

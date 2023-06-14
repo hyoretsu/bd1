@@ -1,6 +1,8 @@
 import { Module } from "@nestjs/common";
 
 import DatabaseModule from "@modules/database/database.module";
+import PostgresProductRepository from "@modules/product/infra/postgres/repositories/products.repository";
+import ProductRepository from "@modules/product/repositories/products.repository";
 
 import HashProvider, { hashProviderImplementations } from "../shared/providers/HashProvider";
 import SellersController from "./infra/http/controllers/sellers.controller";
@@ -8,6 +10,7 @@ import PostgresItemsRepository from "./infra/postgres/repositories/items.reposit
 import PostgresSellersRepository from "./infra/postgres/repositories/sellers.repository";
 import ItemsRepository from "./repositories/items.repository";
 import SellersRepository from "./repositories/sellers.repository";
+import CreateItem from "./services/CreateItem.service";
 import CreateSeller from "./services/CreateSeller.service";
 import DeleteSeller from "./services/DeleteSeller.service";
 import EditSeller from "./services/EditSeller.service";
@@ -22,6 +25,10 @@ import ListSellers from "./services/ListSellers.service";
 			useClass: PostgresItemsRepository,
 		},
 		{
+			provide: ProductRepository,
+			useClass: PostgresProductRepository,
+		},
+		{
 			provide: SellersRepository,
 			useClass: PostgresSellersRepository,
 		},
@@ -29,7 +36,7 @@ import ListSellers from "./services/ListSellers.service";
 			provide: HashProvider,
 			useClass: hashProviderImplementations["bcrypt"],
 		},
-		...[CreateSeller, DeleteSeller, EditSeller, ListSellers],
+		...[CreateItem, CreateSeller, DeleteSeller, EditSeller, ListSellers],
 	],
 })
 export default class SellersModule {}
